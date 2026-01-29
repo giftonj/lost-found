@@ -1,26 +1,22 @@
 <header>
-    <nav class="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 md:px-8 py-3 flex justify-between items-center shadow-sm">
-        <div class="flex items-center gap-2 cursor-pointer" onclick="setView('grid')">
-            <div class="bg-blue-600 p-2 rounded-lg"><i class="fas fa-search text-white"></i></div>
-            <a href="/"><span class="font-bold text-xl tracking-tight">FoundIt</span></a>
+    <nav>
+        <div onclick="setView('grid')">
+            <a href="/"><span>FoundIt</span></a>
         </div>
 
-        <!-- Auth Section -->
-        <div class="flex items-center gap-4">
-            <!-- Logged Out State -->
-            <div id="auth-logged-out" class="flex items-center gap-2">
-                <button onclick="window.location.href='/api/auth/'" class="text-sm font-semibold text-gray-600 hover:text-blue-600 px-3 py-2">Log In</button>
-                <button onclick="window.location.href='/api/auth/new'" class="bg-blue-600 text-white text-sm font-bold px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Join Now</button>
+        
+        <div>
+            <div id="auth-logged-out" >
+                <button onclick="window.location.href='/api/auth/'">Log In</button>
+                <button onclick="window.location.href='/api/auth/new'">Join Now</button>
             </div>
-            <!-- Logged In State (Hidden by default) -->
-            <div id="auth-logged-in" class="hidden flex items-center gap-4">
-                <button onclick="toggleSidebar('messages')" class="relative text-gray-500 hover:text-blue-600 transition-colors">
-                    <i class="fas fa-comment-alt text-xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-[8px] font-bold w-4 h-4 flex items-center justify-center rounded-full border-2 border-white">2</span>
+            <div id="auth-logged-in" >
+                <button onclick="toggleSidebar('messages')">
+                    <span >2</span>
                 </button>
-                <div class="flex items-center gap-2 border-l pl-4 cursor-pointer group">
-                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs group-hover:bg-blue-600 group-hover:text-white transition-all">JD</div>
-                    <span class="text-sm font-bold text-gray-700 hidden lg:block" onclick="toggleAuth(false)">Logout</span>
+                <div>
+                    <div >JD</div>
+                    <span onclick="toggleAuth(false)">Logout</span>
                 </div>
             </div>
         </div>
