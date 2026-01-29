@@ -20,7 +20,11 @@ app.use(expressLayouts);
 app.use(express.static("public"));
 
 const indexRouter = require("./routers/index");
+const postRouter = require("./routers/post");
+const authRouter = require('./routers/auth')
 
 app.use("/", indexRouter);
+app.use("/post", postRouter);
+app.use('/api/auth', authRouter)
 
 app.listen(process.env.port || 3000);

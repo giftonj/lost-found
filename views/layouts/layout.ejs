@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost-Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-bg {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-height {
+            height: calc(100vh - 200px);
+        }
+    </style>
 </head>
+
 <body>
+    <%- include('../partials/header.ejs') %>
     <%- body %>
 </body>
+
 </html>
