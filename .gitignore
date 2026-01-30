@@ -3,7 +3,6 @@ node_modules/
 .env
 
 messageview/
-authview/
-routers/auth.js
-controllers/authController.js
+
+
 public/javascripts/post.js

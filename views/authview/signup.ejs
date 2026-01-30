@@ -1,0 +1,12 @@
+<h2 >Create Account</h2>
+<p >Join the community to help reunite lost items.</p>
+
+<form action="/api/auth/new" method="POST">
+    <label>Full Name</label>
+    <input type="text" name="name" value="<%= user.name %>" placeholder="John Doe" required><br><br>
+    <label >Email</label>
+    <input type="email" name="email" value="<%= user.email %>" placeholder="name@example.com" required><br><br>
+    <label >Password</label>
+    <input type="password" name="password" value="<%= user.password %>" placeholder="Min. 8 characters" required><br><br>
+    <button type="submit">Join FoundIt</button>
+</form>

@@ -5,6 +5,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
+const bodyParser = require("body-parser"); //for accessing the page body
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -18,13 +19,14 @@ db.once("open", () => console.log("Connected to Mongoose Database"));
 
 app.use(expressLayouts);
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 
 const indexRouter = require("./routers/index");
 const postRouter = require("./routers/post");
-const authRouter = require('./routers/auth')
+const authRouter = require("./routers/auth");
 
 app.use("/", indexRouter);
 app.use("/post", postRouter);
-app.use('/api/auth', authRouter)
+app.use("/api/auth", authRouter);
 
 app.listen(process.env.port || 3000);

@@ -1,0 +1,14 @@
+<h2 >Welcome Back</h2>
+<p >Sign in to manage your items and messages.</p>
+<form action="/api/auth" method="POST">
+        <label >Email Address</label>
+        <input type="email" name="email" value="<%= user.email %>" placeholder="name@example.com" required><br><br>
+        <label >Password</label>
+        <input type="password" name="password" value="<%= user.password %>" placeholder="••••••••" required><br><br>
+        <button type="submit">Login</button>
+        <p >New here? <a href="/api/auth/new">Create an account</a></p>
+</form>     
+
+<% if (errorMessage) { %>
+    <p style="color: red;"><%= errorMessage %></p>
+<% } %>

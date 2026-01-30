@@ -4,14 +4,14 @@ const coverImageBasePath = "uploads/postCovers";
 
 const postSchema = new mongoose.Schema(
   {
-    // user: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "User",
-    //   required: true,
-    // },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     title: {
       type: String,
-      required: [true, "Please provide a short title for the item"],
+      required: true,
       trim: true,
     },
     description: {
