@@ -23,22 +23,19 @@ exports.createPost = async (req, res) => {
   // Get the uploaded file name if file exists, otherwise null
   const fileName = req.file != null ? req.file.filename : null
   
-  // Create new Post object with form data
   const post = new Post({
-    title: req.body.title, // FIXED: Changed from req.body.name to req.body.title to match form field
+    title: req.body.title,
     description: req.body.description,
     type: req.body.type,
     status: req.body.status || 'active',
-    cover_image: fileName, // Can be null since we made it optional in the model
+    cover_image: fileName,
     location: req.body.location
   })
 
   try {
-    // Save post to database
     const newPost = await post.save()
-    console.log("Post saved succesfully", newPost)
-    // FIXED: Removed res.status(201).json(newPost) - can't send both JSON and redirect
-    res.redirect('/') // Redirect to home page after successful save
+    console.log("Post saved succesfully")
+    res.redirect('/')
   }
   catch (err) {
     console.error(err)
