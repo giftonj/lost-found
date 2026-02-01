@@ -23,7 +23,7 @@
     </section>
 
     
-</main>
+</main><br>
 
 <main id="the-view">
     <div id="content-area">
@@ -31,14 +31,14 @@
             <div class="post">
                 <section>
                     <% if (post.cover_image) { %>
-                        <img src="/uploads/postCovers/<%= post.cover_image %>" width="100">
+                        <img src="/uploads/postCovers/<%= post.cover_image %>" width="500">
                     <% } %>
                     <h3><%= post.title %></h3>
                     <p><%= post.description %></p>
-                    <small><%= post.type %> - <%= post.location %></small><br>
+                    <small><%= post.type %> - <%= post.location %></small>
                    
                 </section>
-            </div>
+            </div><br><br>
         <% }) %>
     </div>
 </main>
