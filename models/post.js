@@ -4,11 +4,11 @@ const coverImageBasePath = "uploads/postCovers";
 
 const postSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     title: {
       type: String,
       required: true,
@@ -34,7 +34,7 @@ const postSchema = new mongoose.Schema(
     },
     cover_image: {
       type: String,
-      required: true,
+      required: false,
     },
     status: {
       type: String,

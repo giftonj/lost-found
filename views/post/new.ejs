@@ -1,9 +1,9 @@
 <h2>New Post</h2>
-<form action="/" method="GET">
+<form action="/post/new" method="POST" enctype="multipart/form-data">
     <%- include('./_form_field.ejs') %>
 
     <div >
-        <button type="submit">
+        <button type="submit" id="post">
             Post
         </button>
     </div>

@@ -22,5 +22,23 @@
         </div>
     </section>
 
-    <div id="content-area"></div>
+    
+</main>
+
+<main id="the-view">
+    <div id="content-area">
+        <% posts.forEach(post => { %>
+            <div class="post">
+                <section>
+                    <% if (post.cover_image) { %>
+                        <img src="/uploads/postCovers/<%= post.cover_image %>" width="100">
+                    <% } %>
+                    <h3><%= post.title %></h3>
+                    <p><%= post.description %></p>
+                    <small><%= post.type %> - <%= post.location %></small><br>
+                   
+                </section>
+            </div>
+        <% }) %>
+    </div>
 </main>
