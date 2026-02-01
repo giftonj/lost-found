@@ -11,7 +11,7 @@ async function renderNewPage(res, post, hasError = false) {
     res.render("post/new", params);
   } catch (err) {
     console.error(err);
-    res.redirect("/");
+    res.status(302).redirect("/");
   }
 }
 
@@ -35,7 +35,7 @@ exports.createPost = async (req, res) => {
   try {
     const newPost = await post.save()
     console.log("Post saved succesfully")
-    res.redirect('/')
+    res.status(302).redirect('/')
   }
   catch (err) {
     console.error(err)

@@ -27,7 +27,7 @@ exports.createUser = async (req, res) => {
 
     try {
         const newUser = await user.save()
-        res.redirect('/api/auth')
+        res.status(302).redirect('/api/auth')
     }
     catch (err) {
         console.error("Mongoose Save Error", err)
@@ -60,7 +60,7 @@ exports.validateUser = async (req, res) => {
 
         res.cookie('token', token, { httpOnly: true })
 
-        res.redirect('/')
+        res.status(302).redirect('/')
     }
     catch (err) {
         console.error(err)
