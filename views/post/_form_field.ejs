@@ -38,22 +38,19 @@
     </select>
 </div>
 
-<!-- <div>
+<div>
     <label for="category">Category</label>
     <select name="category" id="">
-        //< categories.forEach(category => { %>
-            < if (category.id === post.category) { %>
-                <option selected label="<= category.name %>" value="<= category.id %>"></option>
-            < } else { %>
-                <option label="<= category.name %>" value="<= category.id %>"></option>
-            < } %>
-        < }) %>
+        <% categories.forEach(category => { %>
+            <% if (category.id === post.category) { %>
+                <option selected label="<%= category.name %>" value="<%= category.id %>"></option>
+            <% } else { %>
+                <option label="<%= category.name %>" value="<%= category.id %>"></option>
+            <% } %>
+        <% }) %>
     </select>
-</div> -->
-<!-- <div>
-    <label for="location">location</label>
-    <input type="text" name="location" value="<%= post.location %>">
-</div> -->
+</div>
+
 <div>
     <label for="location" >
         Location

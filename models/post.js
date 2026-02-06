@@ -23,11 +23,11 @@ const postSchema = new mongoose.Schema(
       enum: ["Lost", "Found"],
       required: true,
     },
-    // category: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "Category",
-    //   required: true,
-    // },
+    category: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Category",
+      required: true,
+    },
     location: {
       type: String,
       required: false,
