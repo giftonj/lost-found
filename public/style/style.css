@@ -1,0 +1,33 @@
+.root{
+    --primary: #fff;
+    --blue: #2b59d8ec;
+    --backgrd: #201d1d;
+}
+
+.main-header{
+    background-color: var(--blue);
+}
+.nav{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--blue);
+}
+
+.auth-btn{
+    padding-left: 180vh;
+}
+
+.auth-logged-out{
+    padding: 30vh;
+}
+
+#login{
+    background-color: var(--primary);
+    color: var(--backgrd);
+}
+#login:hover{
+    background-color: var(--blue);
+}
+#signup{
+    background-color: var(--blue);
+}

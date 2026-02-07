@@ -39,7 +39,8 @@ exports.createPost = async (req, res) => {
     type: req.body.type,
     status: req.body.status || 'active',
     cover_image: fileName,
-    location: req.body.location
+    location: req.body.location,
+    category: req.body.category
   })
 
   try {

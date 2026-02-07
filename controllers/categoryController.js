@@ -1,4 +1,3 @@
-const category = require('../models/category')
 const Category = require('../models/category')
 
 exports.getCategoryPage = async (req, res) => {
@@ -21,11 +20,11 @@ exports.createCategory = async (req, res) => {
 
     try {
         const newCategory = await category.save()
-        res.redirect('/category')
+        res.status(302).redirect('/category')
     }
     catch (err) {
         console.error(err)
-        res.status(500).redirect('/category/new')
+        res.status(302).redirect('/category/new')
     }
     
 }

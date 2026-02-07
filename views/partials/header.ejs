@@ -1,14 +1,14 @@
-<header>
-    <nav>
-        <div onclick="setView('grid')">
+<header class="main-header">
+    <nav class="nav">
+        <div class="icon">
             <a href="/"><span>FoundIt</span></a>
         </div>
 
         
-        <div>
+        <div class="auth-btn">
             <div id="auth-logged-out" >
-                <button onclick="window.location.href='/api/auth/'">Log In</button>
-                <button onclick="window.location.href='/api/auth/new'">Join Now</button>
+                <button id="login" onclick="window.location.href='/api/auth/'">Log In</button>
+                <button id="signup" onclick="window.location.href='/api/auth/new'">Join Now</button>
             </div>
             <div id="auth-logged-in" >
                 <!-- <button onclick="toggleSidebar('messages')">Message</button>
