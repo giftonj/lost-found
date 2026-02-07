@@ -1,16 +1,24 @@
-.root{
+:root{
     --primary: #fff;
     --blue: #2b59d8ec;
     --backgrd: #201d1d;
+    --transition: #12a112;
+    --layot: #f8f80b;
 }
 
-.main-header{
-    background-color: var(--blue);
-}
+
 .nav{
     display: flex;
     flex-direction: row;
     background-color: var(--blue);
+    height: 10vh;
+    background: linear-gradient(
+        135deg,
+        var(--blue) 45%,
+        var(--layot) 45%,
+        var(--layot) 55%,
+        var(--blue) 55%)
+
 }
 
 .auth-btn{
@@ -26,8 +34,11 @@
     color: var(--backgrd);
 }
 #login:hover{
-    background-color: var(--blue);
+    background-color: var(--layot);
 }
 #signup{
     background-color: var(--blue);
+}
+#signup:hover{
+    background-color: var(--transition);
 }

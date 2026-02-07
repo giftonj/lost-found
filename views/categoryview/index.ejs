@@ -2,9 +2,9 @@
     <a href="/category/new">New Category</a>
 </div>
 <div class="view">
-    <section class="items-to-view">
-        <% categories.forEach(category => { %>
-            <div><% category.name %></div>
-        <% }) %>
-    </section>
+    <% categories.forEach(category => { %>
+        <section class="items-to-view">
+            <h3><%= category.name %></h3>
+        </section>
+    <% }) %>
 </div>
