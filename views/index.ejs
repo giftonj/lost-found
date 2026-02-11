@@ -13,23 +13,23 @@
 </div>
 
 <!-- Action Bar -->
-<div class="bg-white border-b border-gray-100 sticky top-16 z-40 backdrop-blur-sm bg-white/95">
+<div class="bg-white\/95 border-b border-gray-100 sticky top-16 z-40 backdrop-blur-sm bg-white/95">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <!-- Filter Buttons -->
-        <form action="/" method="GET" class="flex flex-wrap items-center gap-3 mb-6">
-            <button type="submit" name="searchType" value="All" 
-                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+            <button type="button" data-filter="All" 
+                    class="filter-btn px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-blue-600 text-white">
                 All Items
             </button>
-            <button type="submit" name="searchType" value="Lost" 
-                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+            <button type="button" data-filter="Lost" 
+                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
                 Lost
             </button>
-            <button type="submit" name="searchType" value="Found" 
-                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+            <button type="button" data-filter="Found" 
+                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
                 Found
             </button>
-        </form>
+        </div>
         
         <!-- Search and Actions -->
         <div class="flex flex-col sm:flex-row gap-3">
@@ -69,7 +69,7 @@
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% posts.forEach(post => { %>
-            <div class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 cursor-pointer">
+            <div class="post-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 cursor-pointer" data-type="<%= post.type %>">
                 <% if (post.cover_image) { %>
                     <div class="aspect-video overflow-hidden bg-gray-100">
                         <img src="/uploads/postCovers/<%= post.cover_image %>" 
@@ -126,3 +126,33 @@
         </div>
     <% } %>
 </main>
+
+<script>
+// Frontend filtering functionality
+const filterButtons = document.querySelectorAll('.filter-btn');
+const postCards = document.querySelectorAll('.post-card');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const filterValue = this.getAttribute('data-filter');
+        
+        // Update active button styling
+        filterButtons.forEach(btn => {
+            btn.classList.remove('bg-blue-600', 'text-white');
+            btn.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        });
+        this.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+        this.classList.add('bg-blue-600', 'text-white');
+        
+        // Filter posts
+        postCards.forEach(card => {
+            const postType = card.getAttribute('data-type');
+            if (filterValue === 'All' || postType === filterValue) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
