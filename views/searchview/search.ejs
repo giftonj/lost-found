@@ -1,165 +1,134 @@
-
-
-<!-- Top Filter Buttons -->
-<div class="top-filters">
-    <button>All Items</button>
-    <button>Lost</button>
-    <button>Found</button>        
+<!-- Page Header -->
+<div class="bg-white border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Search & Filter</h1>
+        <p class="text-gray-600">Find lost or found items by keyword and category</p>
+    </div>
 </div>
 
-<!-- Search Form -->
-<form action="/search" method="POST">
-    <label for="search">Search</label>
-    <input required type="text" name="query" id="search-item-query" placeholder="Search keys, wallets, pets...">
-
-    <!-- Categories Filter -->
-<% if (categories && categories.length) { %>
-    <div class="categories-container">
-        <% categories.forEach(c => { %>
-            <label>
-                <input type="radio" name="category" value="<%= c.id %>">
-                <%= c.name %>
-            </label>
-        <% }); %>
-        <label>
-            <input type="radio" name="category" value="" checked>
-            All
-        </label>
+<!-- Search Section -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Filter Pills -->
+    <div class="flex flex-wrap gap-2 mb-8">
+        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+            All Items
+        </button>
+        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+            Lost
+        </button>
+        <button class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+            Found
+        </button>
     </div>
-<% } %>
 
-
-    <button type="submit">Search</button>
-</form>
-
-<!-- Posts -->
-<% if (posts && posts.length) { %>
-    <div class="posts-container">
-        <% posts.forEach(p => { %>
-            <div class="post-item">
-                <!-- <% if (p.cover_image) { %>
-                    <img src="/uploads/postCovers/<%= p.cover_image %>" alt="<%= p.title %>">
-                <% } %> -->
-                <h2><%= p.title %></h2>
-                <p><%= p.description %></p>
+    <!-- Search Form -->
+    <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-sm mb-12">
+        <form action="/search" method="POST" class="space-y-6">
+            <!-- Search Input -->
+            <div>
+                <label for="search" class="block text-sm font-medium text-gray-700 mb-2">
+                    Search Query
+                </label>
+                <div class="relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input required 
+                           type="text" 
+                           name="query" 
+                           id="search-item-query" 
+                           placeholder="Search keys, wallets, pets..."
+                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                </div>
             </div>
-        <% }) %>
+
+            <!-- Categories Filter -->
+            <% if (categories && categories.length) { %>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">
+                        Filter by Category
+                    </label>
+                    <div class="flex flex-wrap gap-2">
+                        <% categories.forEach(c => { %>
+                            <label class="inline-flex items-center px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg cursor-pointer transition-all duration-200 group">
+                                <input type="radio" 
+                                       name="category" 
+                                       value="<%= c.id %>" 
+                                       class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                    <%= c.name %>
+                                </span>
+                            </label>
+                        <% }); %>
+                        <label class="inline-flex items-center px-4 py-2 bg-gray-50 hover:bg-gray-100 border border-gray-200 rounded-lg cursor-pointer transition-all duration-200 group">
+                            <input type="radio" 
+                                   name="category" 
+                                   value="" 
+                                   checked 
+                                   class="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                            <span class="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-900">
+                                All Categories
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            <% } %>
+
+            <!-- Submit Button -->
+            <div class="flex justify-end pt-4">
+                <button type="submit" 
+                        class="px-8 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm">
+                    Search Items
+                </button>
+            </div>
+        </form>
     </div>
-<% } else { %>
-    <p>No posts found.</p>
-<% } %>
+
+    <!-- Search Results -->
+    <% if (posts && posts.length) { %>
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Results</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <% posts.forEach(p => { %>
+                    <div class="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 cursor-pointer">
+                        <% if (p.cover_image) { %>
+                            <div class="aspect-video overflow-hidden bg-gray-100">
+                                <img src="/uploads/postCovers/<%= p.cover_image %>" 
+                                     alt="<%= p.title %>" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                            </div>
+                        <% } else { %>
+                            <div class="aspect-video bg-gray-100 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                        <% } %>
+                        
+                        <div class="p-5">
+                            <h2 class="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                <%= p.title %>
+                            </h2>
+                            <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed">
+                                <%= p.description %>
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    <% } else if (typeof posts !== 'undefined') { %>
+        <div class="text-center py-16">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 mb-4">
+                <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">No posts found</h3>
+            <p class="text-gray-600">Try adjusting your search or filters.</p>
+        </div>
+    <% } %>
+</main>
 
 
 
-<style>
-/* General Page Styles */
-
-
-/* Top Filter Buttons */
-.top-filters {
-    margin-bottom: 20px;
-}
-
-.top-filters button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    margin-right: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.top-filters button:hover {
-    background-color: #0056b3;
-}
-
-/* Search Form */
-form {
-    margin-bottom: 20px;
-}
-
-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-form input[type="text"] {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-}
-
-form button[type="submit"] {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-form button[type="submit"]:hover {
-    background-color: #218838;
-}
-
-/* Category Pills */
-.categories-container {
-    margin-top: 10px;
-}
-
-.categories-container label {
-    display: inline-block;
-    margin-right: 10px;
-    margin-bottom: 5px;
-    padding: 5px 12px;
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.categories-container label:hover {
-    background-color: #d0d0d0;
-}
-
-.categories-container input[type="radio"] {
-    margin-right: 5px;
-}
-
-/* Posts */
-.posts-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.post-item {
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.post-item img {
-    max-width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.post-item h2 {
-    margin: 0 0 5px 0;
-    font-size: 1.25em;
-}
-
-.post-item p {
-    margin: 0;
-}
-</style>

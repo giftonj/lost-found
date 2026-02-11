@@ -49,4 +49,9 @@
   #signup:hover {
     background-color: var(--transition);
   }
+
+  .very-specific-class {
+    background-color: var(--primary);
+    color: var(--backgrd);
+  }
 }
