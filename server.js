@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const path = require('path')
 
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
@@ -39,17 +40,20 @@ app.use((req, res, next) => {
 })
 
 app.use(expressLayouts);
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 
 const indexRouter = require("./routers/index");
 const postRouter = require("./routers/post");
 const authRouter = require("./routers/auth");
 const categoryRouter = require('./routers/category')
+const searchRouter = require('./routers/search')
 
 app.use("/", indexRouter);
 app.use("/post", postRouter);
 app.use("/api/auth", authRouter);
 app.use('/category', categoryRouter)
+app.use('/search', searchRouter)
 
 app.listen(process.env.port || 3000);
