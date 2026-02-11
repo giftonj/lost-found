@@ -1,20 +1,29 @@
-<header class="main-header">
-    <nav class="nav">
-        <div class="icon">
-            <a href="/"><span>FoundIt</span></a>
-        </div>
-
-        
-        <div class="auth-btn">
-            <div id="auth-logged-out" >
-                <button id="login" onclick="window.location.href='/api/auth/'">Log In</button>
-                <button id="signup" onclick="window.location.href='/api/auth/new'">Join Now</button>
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50 backdrop-blur-sm bg-white/80">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <a href="/" class="flex items-center space-x-2 group">
+                    <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
+                        <span class="text-white font-bold text-sm">F</span>
+                    </div>
+                    <span class="text-xl font-semibold text-gray-900 tracking-tight">FoundIt</span>
+                </a>
             </div>
-            <div id="auth-logged-in" >
-                <!-- <button onclick="toggleSidebar('messages')">Message</button>
-                <div>
-                    <button><span onclick="toggleAuth(false)">Logout</span></button>
-                </div> -->
+
+            <div class="flex items-center space-x-3">
+                <div id="auth-logged-out">
+                    <button id="login" onclick="window.location.href='/api/auth/'" 
+                            class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200">
+                        Log In
+                    </button>
+                    <button id="signup" onclick="window.location.href='/api/auth/new'" 
+                            class="px-4 py-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 shadow-sm">
+                        Join Now
+                    </button>
+                </div>
+                <div id="auth-logged-in" class="hidden">
+                    <!-- Add logged in user options here -->
+                </div>
             </div>
         </div>
     </nav>
