@@ -1,0 +1,15 @@
+<a href="/search">Back</a>
+<div>
+    <div>
+        <% posts.forEach(p => { %>
+            <section>
+                <% if (p.cover_image) { %>
+                        <img src="/uploads/postCovers/<%= p.cover_image %>" width="500">
+                <% } %>
+                <h3><%= p.title %></h3>
+                <p><%= p.description %></p>
+                <small><%= p.type %> - <%= p.location %></small>
+            </section>
+        <% }) %>
+    </div>
+</div>
