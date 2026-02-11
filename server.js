@@ -52,7 +52,7 @@ const searchRouter = require('./routers/search')
 
 app.use("/", indexRouter);
 app.use("/post", postRouter);
-app.use("/api/auth", authRouter);
+app.use("/auth", authRouter);
 app.use('/category', categoryRouter)
 app.use('/search', searchRouter)
 
