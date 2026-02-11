@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #fff;
+    --blue: #2b59d8ec;
+    --backgrd: #201d1d;
+    --transition: #12a112;
+    --layot: #f8f80b;
+  }
+}
+
+@layer components {
+  .nav {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--blue);
+    height: 10vh;
+    background: linear-gradient(
+      135deg,
+      var(--blue) 45%,
+      var(--layot) 45%,
+      var(--layot) 55%,
+      var(--blue) 55%
+    );
+  }
+
+  .auth-btn {
+    padding-left: 180vh;
+  }
+
+  .auth-logged-out {
+    padding: 30vh;
+  }
+
+  #login {
+    background-color: var(--primary);
+    color: var(--backgrd);
+  }
+
+  #login:hover {
+    background-color: var(--layot);
+  }
+
+  #signup {
+    background-color: var(--blue);
+  }
+
+  #signup:hover {
+    background-color: var(--transition);
+  }
+}
