@@ -22,11 +22,11 @@ const userSchema = new mongoose.Schema(
       minlength: 6,
       select: false,
     },
-    // role: {
-    //   type: String,
-    //   enum: ["user", "admin"],
-    //   default: "user",
-    // },
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
+    },
     joinedAt: {
       type: Date,
       default: Date.now,
