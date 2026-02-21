@@ -17,10 +17,11 @@ exports.getSignUpPage = (req, res) => {
 };
 
 exports.createUser = async (req, res) => {
+  const hashedPassword = await bcryptjs.hash(req.body.password, 10)
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
   });
 
   try {
@@ -39,7 +40,7 @@ exports.validateUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");//the .select is used to get the password because if you querry without it the password will not be displayed
     if (!user) {
       return res.render("authview/login", {
         errorMessage: "Invalid email or password",
@@ -55,7 +56,6 @@ exports.validateUser = async (req, res) => {
 
     const token = jwt.sign(
       { userId: user._id },
-      // Add this secret to your environment variables for security
       process.env.SECRET_KEY,
       { expiresIn: "1h" },
     );

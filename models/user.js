@@ -37,20 +37,22 @@ const userSchema = new mongoose.Schema(
   },
 );
 
-userSchema.pre('save', async function () {
-  if (!this.isModified('password')) return
 
-  try {
-    const salt = await bcryptjs.genSalt(10)
-    this.password = await bcryptjs.hash(this.password, salt)
-  }
-  catch (err) {
-    throw err
-  }
-})
+//this is the same as i have done it in the controller where i hash the password direcly because i dont understand hashing it here
+// userSchema.pre('save', async function () {
+//   if (!this.isModified('password')) return
 
-userSchema.methods.comparePassword = async function (candidatePassword) {
-  return await bcryptjs.compare(candidatePassword, this.password)
-}
+//   try {
+//     const salt = await bcryptjs.genSalt(10)
+//     this.password = await bcryptjs.hash(this.password, salt)
+//   }
+//   catch (err) {
+//     throw err
+//   }
+// })
+
+// userSchema.methods.comparePassword = async function (candidatePassword) {
+//   return await bcryptjs.compare(candidatePassword, this.password)
+// }
 
 module.exports = mongoose.model("User", userSchema);
