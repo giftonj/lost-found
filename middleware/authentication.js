@@ -21,7 +21,7 @@ function authenticateToken(req, res, next) {
   }
 
   jwt.verify(token, secret, (err, decoded) => {
-    if (err) return res.status(403).send('Forbidden');
+    if (err) return res.status(403).send("Forbidden Login to access <a href='/'>Login<a/>");
     req.user = decoded;
     next();
   });
