@@ -73,3 +73,18 @@ function generateAccessToken(userId) {
   return jwt.sign(userId, process.env.ACCESS_TOKEN, {expiresIn: '10m'})
 }
 
+exports.logOutUser = async (req, res) => {
+  try {
+    // Clear any cookies we used for authentication
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    res.clearCookie('token');
+
+    // Redirect to the login page (root route renders the login form)
+    return res.redirect('/');
+  } catch (err) {
+    console.error('Logout error', err);
+    return res.status(500).send('Server Error');
+  }
+} 
+

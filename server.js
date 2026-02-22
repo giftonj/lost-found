@@ -20,24 +20,28 @@ const db = mongoose.connection;
 db.on("error", (erorr) => console.error(erorr));
 db.once("open", () => console.log("Connected to Mongoose Database"));
 
-// Authentication Middlware
+// Authentication middleware: verify access token (if present) and expose `user` to views
 app.use((req, res, next) => {
-  const cookieToken = req.headers.cookie;
-  // Get the 'token' cookiue from cookieToken
-  // JWT token verification logic would go here
-  // jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-  //   if (err) {
-  //     req.user = null;
-  //   } else {
-  //     req.user = user;
-  //   }
-  // });
+  // cookie-parser has already populated req.cookies
+  const accessToken = req.cookies && req.cookies.accessToken;
+  const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
 
-  // If true, set req.user
-  // req.user = { id: 'userId', name: 'username' };
-  // else redirect to login or set req.user = null
-  next()
-})
+  if (!accessToken || !secret) {
+    res.locals.user = null;
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(accessToken, secret);
+    // decoded will contain the payload we signed (e.g. { userId: '...' })
+    res.locals.user = decoded;
+  } catch (err) {
+    // token invalid/expired
+    res.locals.user = null;
+  }
+
+  next();
+});
 
 app.use(expressLayouts);
 app.use(express.static(path.join(__dirname, 'public')));
