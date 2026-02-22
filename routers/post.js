@@ -12,12 +12,13 @@ const upload = multer({
     callback(null, imageMimeTypes.includes(file.mimetype));
   },
 });
+const authorize = require('../middleware/authentication')
 
 //new post
-router.get("/new", postController.getPostForm);
+router.get("/new", authorize, postController.getPostForm);
 
 // // created post
-router.post('/new', upload.single('cover-image'), postController.createPost);
+router.post('/new', authorize, upload.single('cover-image'), postController.createPost);
 
 // //edit
 // router.put();
