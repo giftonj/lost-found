@@ -13,9 +13,6 @@ const upload = multer({
   },
 });
 
-//get the post form
-//router.get("");
-
 //new post
 router.get("/new", postController.getPostForm);
 

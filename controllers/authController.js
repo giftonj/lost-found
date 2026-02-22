@@ -55,7 +55,7 @@ exports.validateUser = async (req, res) => {
 
   const accessToken = generateAccessToken({ userId: user._id });
 
-  const refreshTokenSecret = process.env.SECRET_KEY || process.env.REFRESH_TOKEN_SECRET;
+  const refreshTokenSecret = process.env.SECRET_KEY;
   const refreshToken = jwt.sign({ userId: user._id }, refreshTokenSecret, { expiresIn: "7d" });
 
 
@@ -75,12 +75,10 @@ function generateAccessToken(userId) {
 
 exports.logOutUser = async (req, res) => {
   try {
-    // Clear any cookies we used for authentication
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
     res.clearCookie('token');
 
-    // Redirect to the login page (root route renders the login form)
     return res.redirect('/');
   } catch (err) {
     console.error('Logout error', err);
