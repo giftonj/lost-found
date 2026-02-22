@@ -1,4 +1,3 @@
-const { name } = require("ejs");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
@@ -54,17 +53,23 @@ exports.validateUser = async (req, res) => {
       });
     }
 
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.SECRET_KEY,
-      { expiresIn: "1h" },
-    );
+  const accessToken = generateAccessToken({ userId: user._id });
 
-    res.cookie("token", token, { httpOnly: true });
+  const refreshTokenSecret = process.env.SECRET_KEY || process.env.REFRESH_TOKEN_SECRET;
+  const refreshToken = jwt.sign({ userId: user._id }, refreshTokenSecret, { expiresIn: "7d" });
 
-    res.status(302).redirect("/");
+
+  res.cookie("accessToken", accessToken, { httpOnly: true, maxAge: 10 * 60 * 1000 }); // 10 minutes
+  res.cookie("refreshToken", refreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 days
+
+  res.status(302).redirect("/index");
   } catch (err) {
     console.error(err);
     res.status(500).send("Server Error");
   }
 };
+
+function generateAccessToken(userId) {
+  return jwt.sign(userId, process.env.ACCESS_TOKEN, {expiresIn: '10m'})
+}
+

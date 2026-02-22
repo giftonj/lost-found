@@ -40,10 +40,12 @@ app.use((req, res, next) => {
 })
 
 app.use(expressLayouts);
-// app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, 'public')));
+const cookieParser = require('cookie-parser')
+
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 app.use(express.json())
+app.use(cookieParser());
 
 const indexRouter = require("./routers/index");
 const postRouter = require("./routers/post");
@@ -51,9 +53,9 @@ const authRouter = require("./routers/auth");
 const categoryRouter = require('./routers/category')
 const searchRouter = require('./routers/search')
 
-app.use("/", indexRouter);
+app.use("/index", indexRouter);
 app.use("/post", postRouter);
-app.use("/auth", authRouter);
+app.use("/", authRouter);
 app.use('/category', categoryRouter)
 app.use('/search', searchRouter)
 
