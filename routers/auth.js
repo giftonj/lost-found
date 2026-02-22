@@ -12,8 +12,7 @@ router.get("/", authController.getLoginForm);
 //validation
 router.post('/', authController.validateUser)
 
-// logout route (GET for link, POST for form if needed)
+//logout
 router.get('/logout', authController.logOutUser);
-router.post('/logout', authController.logOutUser);
 
 module.exports = router;
