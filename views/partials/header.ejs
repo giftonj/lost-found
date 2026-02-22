@@ -13,8 +13,7 @@
             <div class="flex items-center space-x-3">
                 <% if (user) { %>
                     <div id="auth-logged-in" class="header-div">
-                        <!-- Add logged in user options here -->
-                        <p>Welcome <%= user.name %></p>
+                        <p id="p-name">Welcome <%= user.name %></p>
                         <a id="login" href="/logout" 
                             class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200 inline-block">
                                 Logout
@@ -30,7 +29,7 @@
                         </a>
                         <a id="signup" href="/new" 
                             class="px-4 py-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 shadow-sm inline-block">
-                                Join Now
+                                Signup
                         </a>
                     </div>
                 <% } %>

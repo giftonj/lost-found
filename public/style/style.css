@@ -970,6 +970,10 @@
   .header-div {
     display: flex;
   }
+  #p-name {
+    align-items: center;
+    justify-content: center;
+  }
 }
 @property --tw-translate-x {
   syntax: "*";
