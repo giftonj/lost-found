@@ -299,9 +299,6 @@
   .grid {
     display: grid;
   }
-  .hidden {
-    display: none;
-  }
   .inline-block {
     display: inline-block;
   }
@@ -969,6 +966,9 @@
   .very-specific-class {
     background-color: var(--primary);
     color: var(--backgrd);
+  }
+  .header-div {
+    display: flex;
   }
 }
 @property --tw-translate-x {

@@ -54,4 +54,7 @@
     background-color: var(--primary);
     color: var(--backgrd);
   }
+  .header-div{
+    display: flex;
+  }
 }
