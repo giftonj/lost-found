@@ -59,8 +59,8 @@ exports.validateUser = async (req, res) => {
   const refreshToken = jwt.sign({ userId: user._id }, refreshTokenSecret, { expiresIn: "7d" });
 
 
-  res.cookie("accessToken", accessToken, { httpOnly: true, maxAge: 10 * 60 * 1000 }); // 10 minutes
-  res.cookie("refreshToken", refreshToken, { httpOnly: true, maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 days
+  res.cookie("accessToken", accessToken, { httpOnly: true });
+  res.cookie("refreshToken", refreshToken, { httpOnly: true });
 
   res.status(302).redirect("/index");
   } catch (err) {
