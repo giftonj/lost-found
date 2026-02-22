@@ -22,7 +22,6 @@ db.once("open", () => console.log("Connected to Mongoose Database"));
 
 // Authentication middleware: verify access token (if present) and expose `user` to views
 app.use((req, res, next) => {
-  // cookie-parser has already populated req.cookies
   const accessToken = req.cookies && req.cookies.accessToken;
   const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
 
@@ -33,10 +32,8 @@ app.use((req, res, next) => {
 
   try {
     const decoded = jwt.verify(accessToken, secret);
-    // decoded will contain the payload we signed (e.g. { userId: '...' })
     res.locals.user = decoded;
   } catch (err) {
-    // token invalid/expired
     res.locals.user = null;
   }
 
