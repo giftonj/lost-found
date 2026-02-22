@@ -1,5 +1,6 @@
 const Post = require("../models/post");
 const Category = require('../models/category')
+const jwt = require('jsonwebtoken')
 
 
 async function renderNewPage(res, post, hasError = false) {
@@ -30,10 +31,13 @@ exports.createPost = async (req, res) => {
   // You will have the user id via token payload
 // const user = req.user;
   // Get the uploaded file name if file exists, otherwise null
-  const fileName = req.file != null ? req.file.filename : null
+  const accessToken = req.cookies && req.cookies.accessToken;
+  const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
+  const decoded = jwt.verify(accessToken, secret);
+  const fileName = req.file != null ? req.file.filename : null;
   
   const post = new Post({
-
+    user: decoded.userId,
     title: req.body.title,
     description: req.body.description,
     type: req.body.type,
@@ -46,7 +50,7 @@ exports.createPost = async (req, res) => {
   try {
     const newPost = await post.save()
     console.log("Post saved succesfully")
-    res.status(302).redirect('/')
+    res.status(302).redirect('/index')
   }
   catch (err) {
     console.error(err)
