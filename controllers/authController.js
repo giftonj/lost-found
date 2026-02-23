@@ -4,14 +4,14 @@ const bcryptjs = require("bcryptjs");
 
 exports.getLoginForm = (req, res) => {
   res.render("authview/login", {
-    user: {},
+    user: null,
     errorMessage: null,
   });
 };
 
 exports.getSignUpPage = (req, res) => {
   res.render("authview/signup", {
-    user: new User(),
+    user: null,
   });
 };
 
