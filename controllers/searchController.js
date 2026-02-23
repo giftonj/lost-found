@@ -52,7 +52,7 @@ exports.searchItems = async (req, res) => {
 
 
 
-    res.status(200).render("searchview/search", {
+    res.status(200).render("index", {
       posts: results,
       categories: await Category.find({}),
 
