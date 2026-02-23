@@ -52,6 +52,7 @@
                 </div>
                 <% if (categories && categories.length) { %>
                     <select name="category" id="">
+                        <option value="">All categories</option>
                         <% categories.forEach(category => { %>
                             <option value="<%= category.id %>"><%= category.name %></option>
                         <% }) %>
@@ -126,6 +127,7 @@
                     <p class="text-sm text-gray-600 line-clamp-2 leading-relaxed">
                         <%= post.description %>
                     </p>
+                    <a href="#">claim</a>
                 </div>
             </div>
         <% }) %>
