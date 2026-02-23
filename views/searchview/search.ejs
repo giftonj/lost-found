@@ -76,8 +76,8 @@
 
             <% if (categories && categories.length) { %>
                 <select name="category" id="">
+                    <option value="">All categories</option>
                     <% categories.forEach(category => { %>
-                        
                         <option value="<%= category.id %>"><%= category.name %></option>
                     <% }) %>
                 </select>
