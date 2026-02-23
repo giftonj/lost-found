@@ -1,6 +1,3 @@
-const jwt = require('jsonwebtoken')
-const path = require('path')
-
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
@@ -9,6 +6,8 @@ const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const bodyParser = require("body-parser"); //for accessing the page body
+const jwt = require('jsonwebtoken')
+const path = require('path')
 const cookieParser = require('cookie-parser')
 const User = require('./models/user')
 
@@ -28,10 +27,10 @@ app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 app.use(express.json())
 app.use(cookieParser());
 
-// Authentication middleware: verify access token (if present) and expose `user` to views
+//middleware: verify access token (if present) some views change how they appear views
 app.use(async(req, res, next) => {
   const accessToken = req.cookies && req.cookies.accessToken;
-  const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
+  const secret = process.env.ACCESS_TOKEN;
 
   if (!accessToken || !secret) {
     res.locals.user = null;
@@ -41,7 +40,7 @@ app.use(async(req, res, next) => {
   try {
     const decoded = jwt.verify(accessToken, secret);
     const user = await User.findById(decoded.userId)
-    res.locals.user = user || null;
+    res.locals.user = user;
   } 
   catch (err) {
     console.log("JWT ERROR:", err.message);
