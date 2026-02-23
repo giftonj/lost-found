@@ -51,7 +51,7 @@
                     </div>
                     <% if (categories && categories.length) { %>
                         <select name="category" 
-                                class="px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 font-medium text-sm min-w-[180px]">
+                                class="px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white text-gray-700 font-medium text-sm min-w-45">
                             <option value="">All categories</option>
                             <% categories.forEach(category => { %>
                                 <option value="<%= category.id %>"><%= category.name %></option>
