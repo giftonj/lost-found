@@ -11,7 +11,7 @@ exports.getLoginForm = (req, res) => {
 
 exports.getSignUpPage = (req, res) => {
   res.render("authview/signup", {
-    user: null,
+    user: new User(),
   });
 };
 
@@ -25,7 +25,7 @@ exports.createUser = async (req, res) => {
 
   try {
     const newUser = await user.save();
-    res.status(302).redirect("/auth");
+    res.status(302).redirect("/");
   } catch (err) {
     console.error("Mongoose Save Error", err);
     res.status(500).render("authview/signup", {
