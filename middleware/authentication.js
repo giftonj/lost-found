@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res, next) {
-  const token = req.cookies && (req.cookies.accessToken || req.cookies.token || req.cookies.refreshToken);
+  const token = req.cookies && (req.cookies.accessToken || req.cookies.refreshToken);
 
   if (!token) {
     return res.status(302).redirect('/');
@@ -12,9 +12,9 @@ function authenticateToken(req, res, next) {
     return res.status(500).send('Server configuration error');
   }
 
-  jwt.verify(token, secret, (err, decoded) => {
+  jwt.verify(token, secret, (err, userPayload) => {
     if (err) return res.status(302).redirect('/');
-    req.user = decoded;
+    req.user = userPayload;
     next();
   });
 }
