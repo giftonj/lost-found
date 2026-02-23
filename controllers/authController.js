@@ -11,7 +11,7 @@ exports.getLoginForm = (req, res) => {
 
 exports.getSignUpPage = (req, res) => {
   res.render("authview/signup", {
-    user: new User(),
+    user: null,
   });
 };
 
