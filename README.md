@@ -13,6 +13,8 @@ npm i
 DATABASE_URL=mongodb:localhost/lost-found
 ```
 ## Install MongoDB
+### Click to install [MongoDB](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-8.2.5-signed.msi)
+
 ## Running the Project
 ```
 npm run devStart
