@@ -15,28 +15,12 @@
 <!-- Action Bar -->
 <div class="bg-white\/95 border-b border-gray-100 sticky top-16 z-40 backdrop-blur-sm bg-white/95">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- Filter Buttons -->
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-            <button type="button" data-filter="All" 
-                    class="filter-btn px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-blue-600 text-white">
-                All Items
-            </button>
-            <button type="button" data-filter="Lost" 
-                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
-                Lost
-            </button>
-            <button type="button" data-filter="Found" 
-                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
-                Found
-            </button>
-        </div>
-        
         <!-- Search and Actions -->
         <div class="flex flex-col lg:flex-row gap-3 items-start lg:items-end">
             <form action="/index" method="POST" class="flex-1 w-full">
-                <label for="search" class="block text-sm font-medium text-gray-700 mb-2">
+                <!-- <label for="search" class="block text-sm font-medium text-gray-700 mb-2">
                     Search Query
-                </label>
+                </label> -->
                 <div class="flex flex-col sm:flex-row gap-3">
                     <div class="relative flex-1">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,12 +57,27 @@
                     <span>Post Item</span>
                 </span>
             </a>
-        </div>
+        </div>        
     </div>
 </div>
 
 <!-- Posts Grid -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+     <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+            <button type="button" data-filter="All" 
+                    class="filter-btn px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-blue-600 text-white">
+                All Items
+            </button>
+            <button type="button" data-filter="Lost" 
+                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+                Lost
+            </button>
+            <button type="button" data-filter="Found" 
+                    class="filter-btn px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">
+                Found
+            </button>
+        </div><br>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% posts.forEach(post => { %>
             <div class="post-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 cursor-pointer" data-type="<%= post.type %>">
