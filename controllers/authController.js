@@ -70,7 +70,7 @@ exports.validateUser = async (req, res) => {
 };
 
 function generateAccessToken(userId) {
-  return jwt.sign(userId, process.env.ACCESS_TOKEN, {expiresIn: '10m'})
+  return jwt.sign(userId, process.env.ACCESS_TOKEN, {expiresIn: '24h'})
 }
 
 exports.logOutUser = async (req, res) => {
