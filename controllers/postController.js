@@ -24,20 +24,13 @@ exports.getPostForm = (req, res) => {
 };
 
 exports.createPost = async (req, res) => {
-  // Run authentication middleware first
-  // const token = res.cookies.get("token")
-  // JWT verification
-  // If true, proceed to create post
-  // You will have the user id via token payload
-// const user = req.user;
-  // Get the uploaded file name if file exists, otherwise null
   const accessToken = req.cookies && req.cookies.accessToken;
   const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
-  const decoded = jwt.verify(accessToken, secret);
+  const payload = jwt.verify(accessToken, secret);
   const fileName = req.file != null ? req.file.filename : null;
   
   const post = new Post({
-    user: decoded.userId,
+    user: payload.userId,
     title: req.body.title,
     description: req.body.description,
     type: req.body.type,
