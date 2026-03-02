@@ -3,7 +3,7 @@ const Category = require('../models/category')
 const jwt = require('jsonwebtoken')
 
 
-async function renderNewPage(res, post, hasError = false) {
+async function renderNewPage(res, hasError = false) {
   try {
     const categories = await Category.find({})
     const post = new Post();
@@ -20,7 +20,7 @@ async function renderNewPage(res, post, hasError = false) {
 }
 
 exports.getPostForm = (req, res) => {
-  renderNewPage(res, new Post());
+  renderNewPage(res);
 };
 
 exports.createPost = async (req, res) => {
