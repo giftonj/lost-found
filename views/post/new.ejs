@@ -1,0 +1,28 @@
+<div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Post an Item</h2>
+            <p class="text-gray-600">Share details about a lost or found item</p>
+        </div>
+
+        <!-- Form -->
+        <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+            <form action="/post/new" method="POST" enctype="multipart/form-data" class="space-y-6">
+                <%- include('./_form_field.ejs') %>
+
+                <div class="flex items-center justify-end space-x-3 pt-6 border-t border-gray-100">
+                    <a href="/index" 
+                       class="px-6 py-3 text-sm font-medium text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 rounded-lg transition-all duration-200">
+                        Cancel
+                    </a>
+                    <button type="submit" 
+                            id="post"
+                            class="px-6 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm">
+                        Post
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

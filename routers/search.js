@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const indexController = require("../controllers/indexCotroller")
-const authorize = require('../middleware/authentication')
 const searchController = require("../controllers/searchController");
+const authorize = require('../middleware/authentication')
 
-router.get("/", authorize, indexController.getIndexPage);
+//search page
+router.get('/', authorize,searchController.searchPage)
+
+//search results
 router.post("/", authorize, searchController.searchItems); 
 
 module.exports = router;

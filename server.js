@@ -5,6 +5,11 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
+const bodyParser = require("body-parser"); //for accessing the page body
+const jwt = require('jsonwebtoken')
+const path = require('path')
+const cookieParser = require('cookie-parser')
+const User = require('./models/user')
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -17,10 +22,46 @@ db.on("error", (erorr) => console.error(erorr));
 db.once("open", () => console.log("Connected to Mongoose Database"));
 
 app.use(expressLayouts);
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
+app.use(express.json())
+app.use(cookieParser());
+
+//middleware: verify access token (if present) some views change how they appear views
+app.use(async(req, res, next) => {
+  const accessToken = req.cookies && req.cookies.accessToken;
+  const secret = process.env.ACCESS_TOKEN;
+
+  if (!accessToken || !secret) {
+    res.locals.user = null;
+    return next();
+  }
+
+  try {
+    const decoded = jwt.verify(accessToken, secret);
+    const user = await User.findById(decoded.userId)
+    res.locals.user = user;
+  } 
+  catch (err) {
+    console.log("JWT ERROR:", err.message);
+    res.locals.user = null;
+  }
+
+  next();
+});
+
+
 
 const indexRouter = require("./routers/index");
+const postRouter = require("./routers/post");
+const authRouter = require("./routers/auth");
+const categoryRouter = require('./routers/category')
+const searchRouter = require('./routers/search')
 
-app.use("/", indexRouter);
+app.use("/index", indexRouter);
+app.use("/post", postRouter);
+app.use("/", authRouter);
+app.use('/category', categoryRouter)
+app.use('/search', searchRouter)
 
 app.listen(process.env.port || 3000);

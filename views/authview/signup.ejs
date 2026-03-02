@@ -1,0 +1,66 @@
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Create Account</h2>
+            <p class="text-gray-600">Join the community to help reunite lost items.</p>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="bg-white rounded-xl border border-gray-200 p-8 shadow-sm">
+            <form action="/new" method="POST" class="space-y-6">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name
+                    </label>
+                    <input type="text" 
+                           id="name" 
+                           name="name" 
+                           value="" 
+                           placeholder="John Doe" 
+                           required
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        Email Address
+                    </label>
+                    <input type="email" 
+                           id="email" 
+                           name="email" 
+                           value="" 
+                           placeholder="name@gmail.com" 
+                           required
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        Password
+                    </label>
+                    <input type="password" 
+                           id="password" 
+                           name="password" 
+                           value="" 
+                           placeholder="Min. 8 characters" 
+                           required
+                           class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                </div>
+
+                <button type="submit" 
+                        class="w-full px-4 py-3 text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 shadow-sm">
+                    Signup
+                </button>
+            </form>
+        </div>
+
+        <!-- Login Link -->
+        <p class="text-center mt-6 text-sm text-gray-600">
+            Already have an account? 
+            <a href="/" class="font-medium text-gray-900 hover:text-gray-700 transition-colors duration-200">
+                Login
+            </a>
+        </p>
+    </div>
+</div>
