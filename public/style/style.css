@@ -299,6 +299,9 @@
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
   .inline-block {
     display: inline-block;
   }
@@ -365,6 +368,9 @@
   .max-w-md {
     max-width: var(--container-md);
   }
+  .min-w-45 {
+    min-width: calc(var(--spacing) * 45);
+  }
   .flex-1 {
     flex: 1;
   }
@@ -392,6 +398,9 @@
   }
   .items-center {
     align-items: center;
+  }
+  .items-start {
+    align-items: flex-start;
   }
   .justify-between {
     justify-content: space-between;
@@ -434,6 +443,9 @@
       margin-inline-start: calc(calc(var(--spacing) * 3) * var(--tw-space-x-reverse));
       margin-inline-end: calc(calc(var(--spacing) * 3) * calc(1 - var(--tw-space-x-reverse)));
     }
+  }
+  .self-stretch {
+    align-self: stretch;
   }
   .overflow-hidden {
     overflow: hidden;
@@ -915,6 +927,21 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
+  .lg\:flex-row {
+    @media (width >= 64rem) {
+      flex-direction: row;
+    }
+  }
+  .lg\:items-end {
+    @media (width >= 64rem) {
+      align-items: flex-end;
+    }
+  }
+  .lg\:self-auto {
+    @media (width >= 64rem) {
+      align-self: auto;
+    }
+  }
   .lg\:px-8 {
     @media (width >= 64rem) {
       padding-inline: calc(var(--spacing) * 8);
@@ -966,13 +993,6 @@
   .very-specific-class {
     background-color: var(--primary);
     color: var(--backgrd);
-  }
-  .header-div {
-    display: flex;
-  }
-  #p-name {
-    align-items: center;
-    justify-content: center;
   }
 }
 @property --tw-translate-x {

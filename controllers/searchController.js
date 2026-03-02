@@ -2,23 +2,6 @@ const Category = require("../models/category");
 const Post = require("../models/post");
 
 
-
-exports.searchPage = async (req, res) => {
-
-
-  try {
-    const categories = await Category.find({});
-    res.status(200).render("searchview/search", {
-      posts: null,
-      categories: categories,
-      // searchOptions: req.query,
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(404).send("Page not found");
-  }
-};
-
 exports.searchItems = async (req, res) => {
   try {
     const searchQuery = req.body.query

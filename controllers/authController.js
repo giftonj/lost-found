@@ -30,7 +30,7 @@ exports.createUser = async (req, res) => {
     console.error("Mongoose Save Error", err);
     res.status(500).render("authview/signup", {
       user: user,
-      errorMessage: "Error creating user" + err.message,
+      errorMessage: "Error creating user",
     });
   }
 };
