@@ -11,6 +11,8 @@ npm i
 ### .env contents
 ```
 DATABASE_URL=mongodb:localhost/lost-found
+ACCESS_TOKEN=anything-you-want
+SECRET_KEY=anything-you-want
 ```
 ## Install MongoDB
 ### Click to install [MongoDB](https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-8.2.5-signed.msi)
