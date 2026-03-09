@@ -57,11 +57,13 @@ const postRouter = require("./routers/post");
 const authRouter = require("./routers/auth");
 const categoryRouter = require('./routers/category')
 const claimRouter = require("./routers/claim")
+const myPostRouter = require("./routers/myPost")
 
 app.use("/", authRouter);
 app.use("/index", indexRouter);
 app.use("/post", postRouter);
 app.use('/category', categoryRouter)
 app.use("/claim", claimRouter)
+app.use('/myPost', myPostRouter)
 
 app.listen(process.env.port || 3000);
