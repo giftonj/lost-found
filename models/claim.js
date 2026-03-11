@@ -20,4 +20,4 @@ const claimSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.Schema("Claim", claimSchema)
+module.exports = mongoose.model("Claim", claimSchema)
