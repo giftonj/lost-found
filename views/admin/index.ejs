@@ -1,0 +1,17 @@
+<div class="shadow">
+    <a href="#">view claim history</a>
+    <br>
+    <a href="#">my posts</a>
+</div>
+
+<div>
+    <div>
+        <h1>posts</h1>
+        <% posts.forEach(post => { %>
+            <div>
+                <h3><%= post.title %></h3>
+                <button class="bg-red-500">Delete</button>
+            </div>
+        <% }) %>
+    </div>
+</div>
