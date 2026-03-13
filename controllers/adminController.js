@@ -5,7 +5,7 @@ const Claim = require('../models/claim')
 
 exports.getAdminpage = async (req, res) => {
     try{
-        const findPosts = await Post.find()
+        const findPosts = await Post.find({ status: 'active' })
         console.log("POSTS", findPosts)
         res.status(200).render('admin/index', {
             posts: findPosts
@@ -37,4 +37,10 @@ exports.allUsers = async (req, res) => {
     res.render('admin/allUsers', {
         users: findUsers
     })
+}
+
+exports.deletePosts = async (req, res) => {
+    const postId = req.params.id
+    const deletePost = await Post.findByIdAndDelete(postId)
+    res.redirect('/admin')
 }

@@ -6,5 +6,6 @@ const allowRoles = require('../middleware/roles')
 router.get('/', allowRoles('admin'), adminController.getAdminpage)
 router.get('/claimed', allowRoles('admin'), adminController.claimHistory)
 router.get('/users', allowRoles('admin'), adminController.allUsers)
+router.get('/delete/:id', adminController.deletePosts)
 
 module.exports = router
