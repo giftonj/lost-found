@@ -29,9 +29,9 @@
                 <span>Email</span>
             </a>
 
-            <% if (contactNumber) { %>
+            <% if (owner.phoneNo) { %>
                 <a
-                    href="https://wa.me/<%= String(contactNumber).replace(/\D/g, '') %>"
+                    href="https://wa.me/<%= owner.phoneNo %>"
                     target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200"
@@ -43,13 +43,13 @@
                 </a>
 
                 <a
-                    href="tel:<%= contactNumber %>"
+                    href="tel:<%= owner.phoneNo %>"
                     class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200"
                 >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.95 1.57l.57 2.49a2 2 0 01-.58 1.94l-1.2 1.2a16 16 0 006.56 6.56l1.2-1.2a2 2 0 011.94-.58l2.49.57A2 2 0 0121 15.72V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"></path>
                     </svg>
-                    <span>Call <%= contactNumber %></span>
+                    <span>Call <%= owner.phoneNo %></span>
                 </a>
             <% } else { %>
                 <span class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed" aria-disabled="true">

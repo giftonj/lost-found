@@ -21,6 +21,7 @@ exports.createUser = async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: hashedPassword,
+    phoneNo: req.body.phoneNo
   });
 
   try {
