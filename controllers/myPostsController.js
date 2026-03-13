@@ -1,6 +1,7 @@
 const Post = require('../models/post')
 const User = require('../models/user')
 const Category = require("../models/category")
+const Claim = require('../models/claim')
 const jwt = require('jsonwebtoken')
 
 exports.viewMyPosts = async (req, res) => {
@@ -11,8 +12,12 @@ exports.viewMyPosts = async (req, res) => {
         const userPayload = jwt.verify(token, accessToken)
 
         const findUser = await User.findById(userPayload.userId)
+        
 
-        const findPosts = await Post.where("user").equals(findUser)
+        const findPosts = await Post.find({
+            user: findUser,
+            status: 'active'
+        })
 
         res.render("myPostView/myPosts", {
             post: findPosts
@@ -53,3 +58,39 @@ exports.updatePost = async (req, res) => {
 
     res.redirect('/myPost')
 }
+
+exports.getVerifyPage = async (req, res) => {
+    try {
+        const postId = req.params.id
+        const post = await Post.findById(postId)
+        res.render('myPostView/verify', {
+            post: post
+        })
+    }
+    catch (err) {}
+}
+
+exports.verifyClaims = async (req, res) => {
+    const postId = req.params.id
+    const details = {
+        name: req.body.name,
+        email: req.body.email,
+        phoneNo: req.body.phoneNo,
+        itemId: postId
+    }
+    const verify =  new Claim(details)
+
+
+    try {
+        const newClaim = await verify.save()
+
+        const findPost = await Post.findByIdAndUpdate(postId, { status: 'found' }, { new: true })
+        console.log('claim saved successfully')
+        res.redirect('/myPost')
+    }
+    catch (err) {
+        console.error(err)
+        res.status(500).send('Server error')
+    }
+}
+
