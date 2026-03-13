@@ -44,3 +44,23 @@ exports.deletePosts = async (req, res) => {
     const deletePost = await Post.findByIdAndDelete(postId)
     res.redirect('/admin')
 }
+
+exports.adminRole = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const changeRole = await User.findByIdAndUpdate(userId)
+        if (changeRole.role === 'admin') {
+            changeRole.role = 'user'
+            await changeRole.save()
+        }
+        else {
+            changeRole.role = 'admin'
+            await changeRole.save()
+        }
+    }
+    catch (err) {
+        console.error(err)
+    }
+    
+    res.redirect('/admin/users')
+}

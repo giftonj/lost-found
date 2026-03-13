@@ -7,5 +7,6 @@ router.get('/', allowRoles('admin'), adminController.getAdminpage)
 router.get('/claimed', allowRoles('admin'), adminController.claimHistory)
 router.get('/users', allowRoles('admin'), adminController.allUsers)
 router.get('/delete/:id', adminController.deletePosts)
+router.get('/users/:id', adminController.adminRole)
 
 module.exports = router

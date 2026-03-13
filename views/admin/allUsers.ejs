@@ -8,6 +8,11 @@
             <h4><%= user.email %></h4>
             <h4>posts <%= user.findPosts.length %></h4>
             <h4>claimed <%= user.findClaimed.length %></h4>
+            <% if (user.role === 'admin') { %>
+                <a href="/admin/users/<%= user._id %>">Revoke admin roles</a>
+            <% } else { %>
+                <a href="/admin/users/<%= user._id %>">Grant admin role</a>
+            <% } %>
         </div><br><br><br>
     <% }) %>
 </div>
