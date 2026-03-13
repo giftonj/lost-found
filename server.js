@@ -33,6 +33,7 @@ app.use(async(req, res, next) => {
   const secret = process.env.ACCESS_TOKEN;
 
   if (!accessToken || !secret) {
+    req.user = null;
     res.locals.user = null;
     return next();
   }
@@ -40,10 +41,12 @@ app.use(async(req, res, next) => {
   try {
     const decoded = jwt.verify(accessToken, secret);
     const user = await User.findById(decoded.userId)
+    req.user = user;
     res.locals.user = user;
   } 
   catch (err) {
     console.log("JWT ERROR:", err.message);
+    req.user = null;
     res.locals.user = null;
   }
 

@@ -1,8 +1,10 @@
 const express = require("express")
 const router = express.Router()
 const adminController = require('../controllers/adminController')
-router.get('/', adminController.getAdminpage)
-router.get('/claimed', adminController.claimHistory)
-router.get('/users', adminController.allUsers)
+const allowRoles = require('../middleware/roles')
+
+router.get('/', allowRoles('admin'), adminController.getAdminpage)
+router.get('/claimed', allowRoles('admin'), adminController.claimHistory)
+router.get('/users', allowRoles('admin'), adminController.allUsers)
 
 module.exports = router
