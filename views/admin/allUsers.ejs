@@ -1,10 +1,13 @@
 <a href="/admin">Back</a>
 <h2>All Users</h2>
 <div>
-    <p>we have <%= users.length %> users</p>
+    <p>we have <%= users.length %> users</p><br><br>
     <% users.forEach(user => { %>
         <div>
             <h3><%= user.name %></h3>
-        </div>
+            <h4><%= user.email %></h4>
+            <h4>posts <%= user.findPosts.length %></h4>
+            <h4>claimed <%= user.findClaimed.length %></h4>
+        </div><br><br><br>
     <% }) %>
 </div>

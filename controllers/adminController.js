@@ -1,6 +1,6 @@
 const Post = require('../models/post')
-const Category = require('../models/category')
 const User = require('../models/user')
+const Claim = require('../models/claim')
 
 
 exports.getAdminpage = async (req, res) => {
@@ -26,6 +26,14 @@ exports.claimHistory = async (req, res) => {
 
 exports.allUsers = async (req, res) => {
     const findUsers = await User.find()
+    for(const user of findUsers) {
+        const findPosts = await Post.find({ user: user._id })
+        user.findPosts = findPosts
+    }
+    for(const user of findUsers) {
+        const findClaimed = await Claim.find({ user: user._id })
+        user.findClaimed = findClaimed
+    }
     res.render('admin/allUsers', {
         users: findUsers
     })
