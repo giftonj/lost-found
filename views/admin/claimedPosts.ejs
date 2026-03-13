@@ -1,0 +1,12 @@
+<a href="/admin">Back</a>
+<h2>Claim history</h2>
+
+<div>
+    <% posts.forEach(post => { %>
+        <div>
+            <h3><%= post.title %></h3>
+            <a href="#">Posters details</a>
+            <a href="#">Claimants details</a>
+        </div>
+    <% }) %>
+</div>

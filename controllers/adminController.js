@@ -15,3 +15,10 @@ exports.getAdminpage = async (req, res) => {
         res.status(403).send("Anauthorized")
     }
 }
+
+exports.claimHistory = async (req, res) => {
+    const findPosts = await Post.find({ status: 'found' })
+    res.render('admin/claimedPosts', {
+        posts: findPosts
+    })
+}
