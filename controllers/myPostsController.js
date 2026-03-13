@@ -38,7 +38,7 @@ exports.editMyPost = async (req, res) => {
 
         console.log("edit: ", edit)
         res.render("post/edit", {
-            post: new Post(edit),
+            post: edit,
             categories: categories
         })
     }
@@ -52,7 +52,19 @@ exports.updatePost = async (req, res) => {
     const postId = req.params.id
     console.log("PsotID: ", postId)
 
-    const edited = await Post.findByIdAndUpdate(postId, req.body, { new: true })
+    // const fileName = req.file != null ? req.file.filename : null;
+
+    // const body = {
+    //     title: req.body.title,
+    //     description: req.body.description,
+    //     type: req.body.type,
+    //     status: req.body.status || 'active',
+    //     cover_image: fileName,
+    //     location: req.body.location,
+    //     category: req.body.category
+    // }
+
+    const edited = await Post.findByIdAndUpdate(postId, body, { new: true })
 
     console.log("Edited: ", edited)
 
