@@ -6,7 +6,6 @@ const Claim = require('../models/claim')
 exports.getAdminpage = async (req, res) => {
     try{
         const findPosts = await Post.find({ status: 'active' })
-        console.log("POSTS", findPosts)
         res.status(200).render('admin/index', {
             posts: findPosts
         })
