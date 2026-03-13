@@ -13,15 +13,15 @@
 </div>
 
 <!-- Action Bar -->
-<div class="bg-white\/95 border-b border-gray-100 sticky top-16 z-40 backdrop-blur-sm bg-white/95">
+<div id="action-bar" class="bg-white\/95 border-b border-gray-100 backdrop-blur-sm bg-white/95 transition-all duration-200 ease-out transform-gpu">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <!-- Search and Actions -->
-        <div class="flex flex-col lg:flex-row gap-3 items-start lg:items-end">
+        <div class="flex flex-col lg:flex-row gap-3 items-stretch lg:items-end">
             <form action="/index" method="POST" class="flex-1 w-full">
                 <!-- <label for="search" class="block text-sm font-medium text-gray-700 mb-2">
                     Search Query
                 </label> -->
-                <div class="flex flex-col sm:flex-row gap-3">
+                <div class="flex flex-col md:flex-row gap-3">
                     <div class="relative flex-1">
                         <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
@@ -43,13 +43,13 @@
                         </select>
                     <% } %>
                     <button type="submit" 
-                            class="px-8 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm whitespace-nowrap">
+                            class="inline-flex items-center justify-center w-full md:w-44 shrink-0 px-8 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm whitespace-nowrap">
                         Search Items
                     </button>
                 </div>
             </form>
             <a href="/post/new" 
-               class="px-6 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm whitespace-nowrap inline-flex items-center self-stretch lg:self-auto">
+               class="inline-flex items-center justify-center w-full md:w-44 lg:w-44 md:ml-auto shrink-0 px-8 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm whitespace-nowrap">
                 <span class="flex items-center space-x-2 justify-center w-full">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -57,9 +57,11 @@
                     <span>Post Item</span>
                 </span>
             </a>
+            
         </div>        
     </div>
 </div>
+<div id="action-bar-spacer" class="hidden" aria-hidden="true"></div>
 
 <!-- Posts Grid -->
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -147,20 +149,125 @@
 // Frontend filtering functionality
 const filterButtons = document.querySelectorAll('.filter-btn');
 const postCards = document.querySelectorAll('.post-card');
-const actionBar = document.querySelector('.bg-white\\/95'); // Select the action bar
+const actionBar = document.getElementById('action-bar');
+const actionBarSpacer = document.getElementById('action-bar-spacer');
 
-let lastScrollTop = 0; // Keep track of the last scroll position
+let lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+const stickyStart = actionBar ? actionBar.offsetTop : 0;
+let currentDirection = 'down';
+let directionChangedAt = Date.now();
+let directionTravel = 0;
+let isStickyMounted = false;
+let isStickyVisible = false;
+let hideTimeoutId = null;
+
+const DIRECTION_BACKOFF_MS = 120;
+const MIN_DIRECTION_TRAVEL = 10;
+const TOP_RELEASE_BUFFER = 8;
+const ANIMATION_MS = 200;
+
+function mountStickyHidden() {
+    if (!actionBar || !actionBarSpacer || isStickyMounted) return;
+
+    actionBar.classList.add('fixed', 'top-16', 'left-0', 'right-0', 'z-40');
+    actionBar.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    actionBar.classList.remove('translate-y-0', 'opacity-100', 'shadow-sm');
+
+    actionBarSpacer.style.height = actionBar.offsetHeight + 'px';
+    actionBarSpacer.classList.remove('hidden');
+
+    isStickyMounted = true;
+    isStickyVisible = false;
+}
+
+function unmountSticky() {
+    if (!actionBar || !actionBarSpacer) return;
+
+    actionBar.classList.remove('fixed', 'top-16', 'left-0', 'right-0', 'z-40', '-translate-y-full', 'opacity-0', 'pointer-events-none', 'translate-y-0', 'opacity-100', 'shadow-sm');
+    actionBarSpacer.classList.add('hidden');
+    actionBarSpacer.style.height = '0px';
+
+    isStickyMounted = false;
+    isStickyVisible = false;
+}
+
+function showStickyActionBar() {
+    if (!actionBar || !actionBarSpacer) return;
+
+    if (hideTimeoutId) {
+        clearTimeout(hideTimeoutId);
+        hideTimeoutId = null;
+    }
+
+    if (!isStickyMounted) {
+        mountStickyHidden();
+    }
+
+    requestAnimationFrame(() => {
+        if (!actionBar) return;
+
+        actionBar.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        actionBar.classList.add('translate-y-0', 'opacity-100', 'shadow-sm');
+        isStickyVisible = true;
+    });
+}
+
+function hideStickyActionBar() {
+    if (!actionBar || !actionBarSpacer) return;
+
+    if (!isStickyMounted || !isStickyVisible) return;
+
+    actionBar.classList.remove('translate-y-0', 'opacity-100', 'shadow-sm');
+    actionBar.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+    isStickyVisible = false;
+
+    if (hideTimeoutId) {
+        clearTimeout(hideTimeoutId);
+    }
+
+    hideTimeoutId = setTimeout(() => {
+        if (!isStickyVisible) {
+            unmountSticky();
+        }
+        hideTimeoutId = null;
+    }, ANIMATION_MS);
+}
 
 window.addEventListener('scroll', function() {
+    if (!actionBar) return;
+
+    const now = Date.now();
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-    if (currentScroll < lastScrollTop) {
-        // Scrolling up
-        actionBar.style.transform = 'translateY(0)'; // Show action bar
-    } else {
-        // Scrolling down
-        actionBar.style.transform = 'translateY(-100%)'; // Hide action bar
+    const delta = currentScroll - lastScrollTop;
+
+    if (Math.abs(delta) < 1) {
+        return;
     }
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+
+    const nextDirection = delta < 0 ? 'up' : 'down';
+
+    if (nextDirection !== currentDirection) {
+        currentDirection = nextDirection;
+        directionChangedAt = now;
+        directionTravel = Math.abs(delta);
+    } else {
+        directionTravel += Math.abs(delta);
+    }
+
+    const directionStable = (now - directionChangedAt) >= DIRECTION_BACKOFF_MS && directionTravel >= MIN_DIRECTION_TRAVEL;
+
+    if (currentScroll <= stickyStart + TOP_RELEASE_BUFFER) {
+        hideStickyActionBar();
+    } else if (directionStable) {
+        // Keep normal flow while scrolling down; show sticky only on stable upward scroll.
+        if (currentDirection === 'up') {
+            showStickyActionBar();
+        } else {
+            hideStickyActionBar();
+        }
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 });
 
 filterButtons.forEach(button => {
