@@ -5,7 +5,7 @@ exports.getIndexPage = async (req, res) => {
   
   try {
     const categories = await Category.find({})
-    const posts = await Post.find().sort({createdAt: 'desc'}).exec()
+    const posts = await Post.find({ status: 'active' }).sort({createdAt: 'desc'}).exec()
     res.render("index", { 
       posts: posts,
       categories: categories
