@@ -1,4 +1,4 @@
-<section class="mt-14 sm:mt-20">
+<section class="mt-8 sm:mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
         <div class="max-w-3xl">
             <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">My posts</h1>
@@ -7,7 +7,7 @@
     </div>
 </section>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 pb-7 sm:pb-9">
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-7 sm:pb-9">
     <% if (post && post.length > 0) { %>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             <% post.forEach(p => { %>
@@ -50,7 +50,7 @@
 
                         <div class="mt-5 flex flex-wrap gap-2">
                             <a href="/myPost/verify/<%= p._id %>" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm">Verify</a>
-                            <a href="/myPost/edit/<%= p._id %>" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-all duration-200">Edit</a>
+                            <a href="/myPost/edit/<%= p._id %>" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-all duration-200">Edit</a>
                             <a href="#" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-all duration-200">Delete</a>
                         </div>
                     </div>
