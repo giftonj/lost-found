@@ -83,17 +83,25 @@ exports.getVerifyPage = async (req, res) => {
 }
 
 exports.verifyClaims = async (req, res) => {
-    const postId = req.params.id
-    const details = {
-        name: req.body.name,
-        email: req.body.email,
-        phoneNo: req.body.phoneNo,
-        itemId: postId
-    }
-    const verify =  new Claim(details)
-
-
     try {
+        const postId = req.params.id
+        const details = {
+            itemId: postId
+        }
+
+        const user = await User.findOne({ email: req.body.email})
+        if(!user) {
+            return res.status(400).json({
+                errorMessage: 'User not found!'
+            })
+        }
+
+        const verify =  new Claim({
+            user: user._id,
+            ...details
+        })
+
+
         const newClaim = await verify.save()
 
         const findPost = await Post.findByIdAndUpdate(postId, { status: 'found' }, { new: true })
