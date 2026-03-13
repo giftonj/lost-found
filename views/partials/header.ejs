@@ -66,12 +66,12 @@
                 <div class="flex flex-col gap-2.5">
                     <p class="text-sm font-medium text-gray-700 px-1">Welcome <%= user.name %></p>
                     <a href="/admin" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200">Admin panel</a>
-                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 active:bg-red-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
+                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
                 </div>
             <% } else if (user) { %>
                 <div class="flex flex-col gap-2.5">
                     <p class="text-sm font-medium text-gray-700 px-1">Welcome <%= user.name %></p>
-                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 active:bg-red-200 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
+                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
                 </div>
             <% } else { %>
                 <div class="flex flex-col gap-2.5">
