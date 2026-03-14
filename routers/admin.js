@@ -8,5 +8,6 @@ router.get('/claimed', allowRoles('admin'), adminController.claimHistory)
 router.get('/users', allowRoles('admin'), adminController.allUsers)
 router.get('/delete/:id', adminController.deletePosts)
 router.get('/users/:id', adminController.adminRole)
+router.get('/claimed/user-details/:id', adminController.userDetailsInClaimedHistory)
 
 module.exports = router
