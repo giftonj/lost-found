@@ -43,6 +43,7 @@ exports.editMyPost = async (req, res) => {
         })
     }
     catch(err) {
+        console.error(err);
         res.redirect('myPost/:id')
     }
     
@@ -78,7 +79,10 @@ exports.getVerifyPage = async (req, res) => {
             post: post
         })
     }
-    catch (err) {}
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Server Error");
+    }
 }
 
 exports.verifyClaims = async (req, res) => {

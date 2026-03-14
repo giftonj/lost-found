@@ -56,12 +56,12 @@ exports.adminRole = async (req, res) => {
             changeRole.role = 'admin'
             await changeRole.save()
         }
+        res.redirect('/admin/users')
     }
     catch (err) {
         console.error(err)
+        res.status(500).send("Server Error")
     }
-    
-    res.redirect('/admin/users')
 }
 
 exports.userDetailsInClaimedHistory = async (req, res) => {
