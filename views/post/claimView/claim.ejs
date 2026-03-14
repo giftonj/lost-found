@@ -1,10 +1,12 @@
-<% const contactNumber = owner.phone || owner.phoneNumber || owner.whatsapp; %>
-
 <section class="mt-8 sm:mt-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
         <div class="max-w-3xl mx-auto text-center">
             <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Contact details</h1>
-            <p class="mt-2 text-sm sm:text-base text-gray-600">Reach the finder or loser using the options below.</p>
+            <% if (type.type === 'Lost') { %>
+                <p class="mt-2 text-sm sm:text-base text-gray-600">Reach the loser using the options below.</p>
+            <% } else { %>
+                <p class="mt-2 text-sm sm:text-base text-gray-600">Reach the finder using the options below.</p>
+            <% } %>
         </div>
     </div>
 </section>
@@ -12,13 +14,13 @@
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
     <div class="max-w-xl mx-auto bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6 text-center">
         <div class="mb-5 pb-4 border-b border-gray-100">
-            <h2 class="text-lg font-semibold text-gray-900"><%= owner.name %></h2>
-            <p class="mt-1 text-sm text-gray-600 break-all"><%= owner.email %></p>
+            <h2 class="text-lg font-semibold text-gray-900"><%= user.name %></h2>
+            <p class="mt-1 text-sm text-gray-600 break-all"><%= user.email %></p>
         </div>
 
         <div class="flex flex-col gap-3 items-center">
             <a
-                href="mailto:<%= owner.email %>"
+                href="mailto:<%= user.email %>"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm"
@@ -29,43 +31,28 @@
                 <span>Email</span>
             </a>
 
-            <% if (owner.phoneNo) { %>
-                <a
-                    href="https://wa.me/<%= owner.phoneNo %>"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 rounded-lg transition-all duration-200"
-                >
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19.05 4.91A9.82 9.82 0 0012.07 2C6.62 2 2.2 6.42 2.2 11.87c0 1.74.45 3.44 1.31 4.94L2 22l5.34-1.4a9.84 9.84 0 004.73 1.21h.01c5.45 0 9.87-4.42 9.87-9.87 0-2.64-1.03-5.12-2.9-7.03zM12.08 20.1h-.01a8.2 8.2 0 01-4.17-1.14l-.3-.18-3.17.83.85-3.09-.2-.32a8.17 8.17 0 01-1.26-4.33c0-4.51 3.67-8.18 8.18-8.18a8.13 8.13 0 015.81 2.41 8.13 8.13 0 012.4 5.79c0 4.51-3.67 8.18-8.13 8.21zm4.49-6.11c-.25-.12-1.49-.73-1.72-.81-.23-.09-.4-.12-.56.12-.17.25-.65.8-.8.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.25-.01-.39.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.65.31-.23.25-.85.83-.85 2.03 0 1.2.87 2.35.99 2.51.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.49-.61 1.7-1.2.21-.6.21-1.11.14-1.2-.06-.1-.23-.15-.48-.27z"/>
-                    </svg>
-                    <span>Chat on WhatsApp</span>
-                </a>
+            <a
+                href="https://wa.me/<%= user.phoneNo %>"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-white bg-green-500 hover:bg-green-600 rounded-lg transition-all duration-200"
+            >
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.05 4.91A9.82 9.82 0 0012.07 2C6.62 2 2.2 6.42 2.2 11.87c0 1.74.45 3.44 1.31 4.94L2 22l5.34-1.4a9.84 9.84 0 004.73 1.21h.01c5.45 0 9.87-4.42 9.87-9.87 0-2.64-1.03-5.12-2.9-7.03zM12.08 20.1h-.01a8.2 8.2 0 01-4.17-1.14l-.3-.18-3.17.83.85-3.09-.2-.32a8.17 8.17 0 01-1.26-4.33c0-4.51 3.67-8.18 8.18-8.18a8.13 8.13 0 015.81 2.41 8.13 8.13 0 012.4 5.79c0 4.51-3.67 8.18-8.13 8.21zm4.49-6.11c-.25-.12-1.49-.73-1.72-.81-.23-.09-.4-.12-.56.12-.17.25-.65.8-.8.97-.14.17-.29.19-.54.06-.25-.12-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.37-1.7-.14-.25-.01-.39.11-.51.11-.11.25-.29.37-.43.12-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.36-.77-1.86-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.65.31-.23.25-.85.83-.85 2.03 0 1.2.87 2.35.99 2.51.12.17 1.71 2.61 4.14 3.66.58.25 1.03.4 1.39.51.58.19 1.11.16 1.53.1.47-.07 1.49-.61 1.7-1.2.21-.6.21-1.11.14-1.2-.06-.1-.23-.15-.48-.27z"/>
+                </svg>
+                <span>Chat on WhatsApp</span>
+            </a>
 
-                <a
-                    href="tel:<%= owner.phoneNo %>"
-                    class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-white bg-gray-400 hover:bg-gray-500 rounded-lg transition-all duration-200"
-                >
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.95 1.57l.57 2.49a2 2 0 01-.58 1.94l-1.2 1.2a16 16 0 006.56 6.56l1.2-1.2a2 2 0 011.94-.58l2.49.57A2 2 0 0121 15.72V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"></path>
-                    </svg>
-                    <span>Call <%= owner.phoneNo %></span>
-                </a>
-            <% } else { %>
-                <span class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed" aria-disabled="true">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M19.05 4.91A9.82 9.82 0 0012.07 2C6.62 2 2.2 6.42 2.2 11.87c0 1.74.45 3.44 1.31 4.94L2 22l5.34-1.4a9.84 9.84 0 004.73 1.21h.01c5.45 0 9.87-4.42 9.87-9.87 0-2.64-1.03-5.12-2.9-7.03z"/>
-                    </svg>
-                    <span>WhatsApp unavailable</span>
-                </span>
-
-                <span class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed" aria-disabled="true">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.95 1.57l.57 2.49a2 2 0 01-.58 1.94l-1.2 1.2a16 16 0 006.56 6.56l1.2-1.2a2 2 0 011.94-.58l2.49.57A2 2 0 0121 15.72V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"></path>
-                    </svg>
-                    <span>Call unavailable</span>
-                </span>
-            <% } %>
+            <a
+                href="tel:<%= user.phoneNo %>"
+                class="inline-flex items-center justify-center gap-2 w-full sm:w-80 px-4 py-2.5 text-sm font-medium text-white bg-gray-400 hover:bg-gray-500 rounded-lg transition-all duration-200"
+            >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a2 2 0 011.95 1.57l.57 2.49a2 2 0 01-.58 1.94l-1.2 1.2a16 16 0 006.56 6.56l1.2-1.2a2 2 0 011.94-.58l2.49.57A2 2 0 0121 15.72V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"></path>
+                </svg>
+                <span>Call <%= user.phoneNo %></span>
+            </a>
+            
         </div>
     </div>
 </main>

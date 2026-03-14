@@ -11,7 +11,8 @@ exports.claimItem = async (req, res) => {
 
         const findUser = await User.findById(userId)
         res.render("post/claimView/claim", {
-            owner: findUser
+            user: findUser,
+            type: findpost
         })
     }
     catch (err) {
