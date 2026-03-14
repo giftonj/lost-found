@@ -19,7 +19,7 @@ exports.viewMyPosts = async (req, res) => {
             status: 'active'
         })
 
-        res.render("myPostView/myPosts", {
+        res.render("post/myPostView/myPosts", {
             post: findPosts
         })
     }
@@ -50,7 +50,7 @@ exports.editMyPost = async (req, res) => {
 
 exports.updatePost = async (req, res) => {
     const postId = req.params.id
-    console.log("PsotID: ", postId)
+    console.log("PostID: ", postId)
 
     const fileName = req.file != null ? req.file.filename : null;
 
@@ -74,7 +74,7 @@ exports.getVerifyPage = async (req, res) => {
     try {
         const postId = req.params.id
         const post = await Post.findById(postId)
-        res.render('myPostView/verify', {
+        res.render('post/myPostView/verify', {
             post: post
         })
     }
