@@ -3,10 +3,9 @@ const Category = require('../models/category')
 const jwt = require('jsonwebtoken')
 
 
-async function renderNewPage(res, hasError = false) {
+async function renderNewPage(res, post = new Post(), hasError = false) {
   try {
     const categories = await Category.find({})
-    const post = new Post();
     const params = {
       post: post,
       categories: categories
