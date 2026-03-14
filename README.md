@@ -19,5 +19,5 @@ SECRET_KEY=anything-you-want
 
 ## Running the Project
 ```
-npm run devStart
+npm run dev
 ```
