@@ -12,28 +12,21 @@ exports.searchItems = async (req, res) => {
     const sortField = req.body.sortField || "createdAt"; // default sort field
     const sortOrder = req.body.sortOrder === "asc" ? 1 : -1; // default descending
 
- 
-
-    
     // Build MongoDB query
     const query = {
       $or: [
         { title: { $regex: searchQuery, $options: "i" } },
-        // { description: { $regex: searchQuery, $options: "i" } }, // optional
+        // { description: { $regex: searchQuery, $options: "i" } }, // search with description
       ],
     };
 
-    // Only add category filter if one is selected (not "All")
     if (searchCategoryId) {
-      query.category = searchCategoryId; // assumes Post has a `category` field storing the category ID
+      query.category = searchCategoryId;
     }
 
-  // Fetch posts
     const results = await Post.find(query)
       .limit(limit)
       .sort({ [sortField]: sortOrder });
-
-
 
     res.status(200).render("index", {
       posts: results,

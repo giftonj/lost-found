@@ -14,16 +14,8 @@ const upload = multer({
 });
 const authorize = require('../middleware/authentication')
 
-//new post
 router.get("/new", authorize, postController.getPostForm);
-
-// // created post
 router.post('/new', authorize, upload.single('cover-image'), postController.createPost);
 
-// //edit
-// router.put();
-
-// //delete
-// router.delete();
 
 module.exports = router;

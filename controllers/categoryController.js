@@ -2,13 +2,13 @@ const Category = require('../models/category')
 
 exports.getCategoryPage = async (req, res) => {
     const categories = await Category.find({})
-    res.status(200).render('categoryview/index.ejs', {
+    res.status(200).render('admin/categoryview/index.ejs', {
         categories: categories
     })
 }
 
 exports.createNew = (req, res) => {
-    res.render('categoryview/new.ejs', {
+    res.render('admin/categoryview/new.ejs', {
         category: new Category()
     })
 }

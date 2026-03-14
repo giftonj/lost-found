@@ -33,6 +33,7 @@ app.use(async(req, res, next) => {
   const secret = process.env.ACCESS_TOKEN;
 
   if (!accessToken || !secret) {
+    req.user = null;
     res.locals.user = null;
     return next();
   }
@@ -40,10 +41,12 @@ app.use(async(req, res, next) => {
   try {
     const decoded = jwt.verify(accessToken, secret);
     const user = await User.findById(decoded.userId)
+    req.user = user;
     res.locals.user = user;
   } 
   catch (err) {
     console.log("JWT ERROR:", err.message);
+    req.user = null;
     res.locals.user = null;
   }
 
@@ -56,10 +59,16 @@ const indexRouter = require("./routers/index");
 const postRouter = require("./routers/post");
 const authRouter = require("./routers/auth");
 const categoryRouter = require('./routers/category')
+const claimRouter = require("./routers/claim")
+const myPostRouter = require("./routers/myPost")
+const adminRouter = require('./routers/admin')
 
 app.use("/", authRouter);
 app.use("/index", indexRouter);
 app.use("/post", postRouter);
 app.use('/category', categoryRouter)
+app.use("/claim", claimRouter)
+app.use('/myPost', myPostRouter)
+app.use('/admin', adminRouter)
 
 app.listen(process.env.port || 3000);

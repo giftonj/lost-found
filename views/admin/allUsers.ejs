@@ -1,0 +1,42 @@
+<section class="mt-8 sm:mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
+        <div class="max-w-3xl">
+            <a href="/admin" class="inline-flex items-center text-sm font-medium text-blue-700 hover:text-blue-800 mb-4">Back to admin</a>
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">All users</h1>
+            <p class="mt-2 text-sm sm:text-base text-gray-600">We have <%= users.length %> users.</p>
+        </div>
+    </div>
+</section>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
+    <% if (users && users.length > 0) { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <% users.forEach(user => { %>
+                <article class="bg-white rounded-xl border border-gray-200 shadow-sm p-5 sm:p-6">
+                    <h3 class="text-lg font-semibold text-gray-900"><%= user.name %></h3>
+                    <p class="text-sm text-gray-600 mt-1 break-all"><%= user.email %></p>
+
+                    <div class="mt-4 flex flex-wrap gap-2 text-xs">
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700">Posts: <%= user.findPosts.length %></span>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full bg-gray-100 text-gray-700">Claimed: <%= user.findClaimed.length %></span>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full <%= user.role === 'admin' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800' %>">
+                            <%= user.role %>
+                        </span>
+                    </div>
+
+                    <div class="mt-5">
+                        <% if (user.role === 'admin') { %>
+                            <a href="/admin/users/<%= user._id %>" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-all duration-200">Revoke admin role</a>
+                        <% } else { %>
+                            <a href="/admin/users/<%= user._id %>" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm">Grant admin role</a>
+                        <% } %>
+                    </div>
+                </article>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="text-center py-16 bg-white border border-gray-200 rounded-xl">
+            <p class="text-gray-500 italic">No users available</p>
+        </div>
+    <% } %>
+</main>

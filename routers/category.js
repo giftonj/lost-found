@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const categoryController = require('../controllers/categoryController')
-const authorize = require('../middleware/authentication')
+const allowRoles = require('../middleware/roles')
 
-router.get('/', authorize, categoryController.getCategoryPage)
-router.get('/new', authorize, categoryController.createNew)
-router.post('/new', authorize, categoryController.createCategory)
+router.get('/', allowRoles('admin'), categoryController.getCategoryPage)
+router.get('/new', allowRoles('admin'), categoryController.createNew)
+router.post('/new', allowRoles('admin'), categoryController.createCategory)
 
 module.exports = router

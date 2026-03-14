@@ -3,37 +3,112 @@
         <div class="flex justify-between items-center h-16">
             <div class="flex items-center">
                 <a href="/index" class="flex items-center space-x-2 group">
-                    <div class="w-8 h-8 bg-gray-900 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center transform group-hover:scale-105 transition-transform duration-200">
                         <span class="text-white font-bold text-sm">F</span>
                     </div>
                     <span class="text-xl font-semibold text-gray-900 tracking-tight">FoundIt</span>
                 </a>
             </div>
 
-            <div class="flex items-center space-x-3">
-                <% if (user) { %>
-                    <div id="auth-logged-in" class="flex items-center space-x-3">
+            <div class="hidden md:flex items-center space-x-3">
+                <% if (user && user.role === 'admin') { %>
+                    <div class="flex items-center space-x-3">
                         <p class="text-sm font-medium text-gray-700">Welcome <%= user.name %></p>
-                        <a id="login" href="/logout" 
-                            class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200 inline-block">
+                        <a href="/admin" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200">Admin panel</a>
+                        <a href="/logout" 
+                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">
+                                Logout
+                        </a>
+                    </div>
+                <% } else if (user) { %>
+                    <div class="flex items-center space-x-3">
+                        <p class="text-sm font-medium text-gray-700">Welcome <%= user.name %></p>
+                        <a href="/logout" 
+                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">
                                 Logout
                         </a>
                         
                     </div>
                    
                 <% } else { %>
-                    <div id="auth-logged-out">
-                        <a id="login" href="/" 
-                            class="px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200 inline-block">
+                    <div class="flex items-center space-x-3">
+                        <a href="/" 
+                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200">
                                 Log In
                         </a>
-                        <a id="signup" href="/new" 
-                            class="px-4 py-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-800 rounded-lg transition-all duration-200 shadow-sm inline-block">
+                        <a href="/new" 
+                            class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 shadow-sm">
                                 Signup
                         </a>
                     </div>
                 <% } %>
             </div>
+
+            <button
+                id="mobile-menu-button"
+                type="button"
+                class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:bg-gray-100 active:bg-gray-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+                aria-label="Toggle menu"
+            >
+                <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="md:hidden hidden border-t border-gray-100 py-3">
+            <% if (user && user.role === 'admin') { %>
+                <div class="flex flex-col gap-2.5">
+                    <p class="text-sm font-medium text-gray-700 px-1">Welcome <%= user.name %></p>
+                    <a href="/admin" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200">Admin panel</a>
+                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
+                </div>
+            <% } else if (user) { %>
+                <div class="flex flex-col gap-2.5">
+                    <p class="text-sm font-medium text-gray-700 px-1">Welcome <%= user.name %></p>
+                    <a href="/logout" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-white bg-gray-500 hover:bg-gray-700 active:bg-gray-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 transition-all duration-200">Logout</a>
+                </div>
+            <% } else { %>
+                <div class="flex flex-col gap-2.5">
+                    <a href="/" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200">Log In</a>
+                    <a href="/new" class="inline-flex items-center justify-center w-full px-4 py-2.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-800 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 transition-all duration-200 shadow-sm">Signup</a>
+                </div>
+            <% } %>
         </div>
     </nav>
 </header>
+
+<script>
+(() => {
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-open-icon');
+    const closeIcon = document.getElementById('menu-close-icon');
+
+    if (!menuButton || !mobileMenu || !openIcon || !closeIcon) {
+        return;
+    }
+
+    menuButton.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        mobileMenu.classList.toggle('hidden');
+        openIcon.classList.toggle('hidden');
+        closeIcon.classList.toggle('hidden');
+        menuButton.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    });
+
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            mobileMenu.classList.add('hidden');
+            openIcon.classList.remove('hidden');
+            closeIcon.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
+        }
+    });
+})();
+</script>
