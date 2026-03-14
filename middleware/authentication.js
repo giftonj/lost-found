@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 
 function authenticateToken(req, res, next) {
-  const token = req.cookies && (req.cookies.accessToken || req.cookies.refreshToken);
+  const token = req.cookies && req.cookies.accessToken;
 
   if (!token) {
     return res.status(302).redirect('/');
   }
 
-  const secret = process.env.ACCESS_TOKEN || process.env.SECRET_KEY;
+  const secret = process.env.ACCESS_TOKEN;
   if (!secret) {
     return res.status(500).send('Server configuration error');
   }

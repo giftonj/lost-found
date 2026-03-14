@@ -59,9 +59,14 @@ exports.validateUser = async (req, res) => {
   const refreshTokenSecret = process.env.SECRET_KEY;
   const refreshToken = jwt.sign({ userId: user._id }, refreshTokenSecret, { expiresIn: "7d" });
 
+  const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  };
 
-  res.cookie("accessToken", accessToken, { httpOnly: true });
-  res.cookie("refreshToken", refreshToken, { httpOnly: true });
+  res.cookie("accessToken", accessToken, cookieOptions);
+  res.cookie("refreshToken", refreshToken, cookieOptions);
 
   res.status(302).redirect("/index");
   } catch (err) {
