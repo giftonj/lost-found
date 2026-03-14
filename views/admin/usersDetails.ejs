@@ -2,30 +2,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 sm:py-3">
         <div class="max-w-3xl">
             <a href="/admin/claimed" class="inline-flex items-center text-sm font-medium text-blue-700 hover:text-blue-800 mb-4">Back to claim history</a>
-            <% if (poster) { %>
-                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Posters details</h1>
-                <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
-                    <div class="max-w-xl bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
-                        <h3 class="text-lg font-semibold text-gray-900"><%= poster.name %></h3>
-                        <p class="mt-2 text-sm text-gray-600 break-all"><%= poster.email %></p>
-                    </div>
-                </main>
-            <% } else { %>
-                <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Claimnat details</h1>
-                <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
-                    <div class="max-w-xl bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
-                        <h3 class="text-lg font-semibold text-gray-900"><%= claimer.name %></h3>
-                        <p class="mt-2 text-sm text-gray-600 break-all"><%= claimer.email %></p>
-                    </div>
-                </main>
-            <% } %>
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Posters details</h1>
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
+                <div class="max-w-xl bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
+                    <h3 class="text-lg font-semibold text-gray-900"><%= poster.name %></h3>
+                    <p class="mt-2 text-sm text-gray-600 break-all"><%= poster.email %></p>
+                </div>
+            </main>
+            <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight">Claimnat details</h1>
+            <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
+                <div class="max-w-xl bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
+                    <h3 class="text-lg font-semibold text-gray-900"><%= claimer.name %></h3>
+                    <p class="mt-2 text-sm text-gray-600 break-all"><%= claimer.email %></p>
+                </div>
+            </main>
         </div>
     </div>
 </section>
-
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-5 pb-8 sm:pb-10">
-    <div class="max-w-xl bg-white border border-gray-200 rounded-xl shadow-sm p-5 sm:p-6">
-        <h3 class="text-lg font-semibold text-gray-900"><%= user.name %></h3>
-        <p class="mt-2 text-sm text-gray-600 break-all"><%= user.email %></p>
-    </div>
-</main>

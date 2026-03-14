@@ -65,25 +65,19 @@ exports.adminRole = async (req, res) => {
 }
 
 exports.userDetailsInClaimedHistory = async (req, res) => {
-    const claimId = req.params.id
+    const postId = req.params.id
 
-    const findClaim = await Claim.findById(claimId)
-    console.log('FindClaim: ', findClaim)
+    const findClaimedPost = await Post.findById(postId)
+    const poster = findClaimedPost.user
 
-    const postId = findClaim.itemId
-    console.log("PostId: ", postId)
 
-    const findPost = await Post.findById(postId)
-    console.log("FindPost: ", findPost)
-
-    const poster = findPost.user
-    console.log("Poster: ", poster)
-
+    const findClaim = await Claim.findOne({ itemId: findClaimedPost })
     const claimer = findClaim.user
-    console.log("claimer: ", claimer)
 
     const findPoster = await User.findById(poster)
     const findClaimer = await User.findById(claimer)
+
+    
 
     res.render('admin/usersDetails', {
         poster: findPoster,
