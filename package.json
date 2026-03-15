@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "postcss public/style/tailwind.css -o public/style/style.css",
     "build": "npm run build:css",
-    "start": "npm run build && node server.js",
+    "start": "node server.js",
     "devStart": "nodemon server.js",
     "watch:css": "postcss public/style/tailwind.css -o public/style/style.css --watch",
     "dev": "concurrently \"npm run watch:css\" \"npm run devStart\""
