@@ -71,4 +71,4 @@ app.use("/claim", claimRouter)
 app.use('/myPost', myPostRouter)
 app.use('/admin', adminRouter)
 
-app.listen(process.env.port || 3000);
+app.listen(process.env.PORT || 3000);
