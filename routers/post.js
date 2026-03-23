@@ -5,7 +5,7 @@ const Post = require('../models/post')
 const multer = require("multer");
 const path = require("path");
 const uploadPath = path.join("public", Post.coverImageBasePath);
-const imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/avif"];
+const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 const upload = multer({
   dest: uploadPath,
   fileFilter: (req, file, callback) => {
