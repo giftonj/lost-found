@@ -40,6 +40,12 @@ const postSchema = new mongoose.Schema(
       enum: ["active", "found"],
       default: "active",
     },
+    notifiedMatches: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post'
+      }
+    ]
   },
   {
     timestamps: true,
