@@ -26,6 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: false}))
 app.use(express.json())
 app.use(cookieParser());
+require("./crons");
+
 
 //middleware: verify access token (if present) some views change how they appear views
 app.use(async(req, res, next) => {
