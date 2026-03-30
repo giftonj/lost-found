@@ -13,10 +13,17 @@
 </div>
 
 <!-- Action Bar -->
-<div id="action-bar" class="bg-white\/95 border-b border-gray-100 backdrop-blur-sm bg-white/95 transition-all duration-200 ease-out transform-gpu">
+<!-- <div id="action-bar" class="bg-white\/95 border-b border-gray-100 backdrop-blur-sm bg-white/95 transition-all duration-200 ease-out transform-gpu">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <!-- Search and Actions -->
-        <div class="flex flex-col lg:flex-row gap-3 items-stretch lg:items-end">
+        
+                
+    </div>
+</div> -->
+<div id="action-bar-spacer" class="hidden" aria-hidden="true"></div>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Search and Actions -->
+    <div class="flex flex-col lg:flex-row gap-3 items-stretch lg:items-end">
             <form action="/index" method="POST" class="flex-1 w-full">
                 <div class="flex flex-col md:flex-row gap-3">
                     <div class="relative flex-1">
@@ -55,13 +62,7 @@
                 </span>
             </a>
             
-        </div>        
-    </div>
-</div>
-<div id="action-bar-spacer" class="hidden" aria-hidden="true"></div>
-
-<!-- Posts Grid -->
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        </div> <br> 
      <!-- Filter Buttons -->
         <div class="flex flex-wrap items-center gap-3 mb-6">
             <button type="button" data-filter="All" 
@@ -78,6 +79,8 @@
             </button>
             <a href="/myPost" class="inline-flex items-center justify-center w-full md:w-44 lg:w-44 md:ml-auto shrink-0 px-8 py-3 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-all duration-200 shadow-sm whitespace-nowrap">My posts</a>
         </div><br>
+        
+    <!-- Posts Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% posts.forEach(post => { %>
             <div class="post-card group bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-gray-300 transition-all duration-300 cursor-pointer" data-type="<%= post.type %>">
