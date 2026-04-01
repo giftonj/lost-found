@@ -81,4 +81,4 @@ Before running this project, make sure you have the following installed:
 - `views/`: EJS templates for the frontend.
 - `public/`: Static assets including generated CSS and uploaded images.
 - `middleware/`: Custom middleware (e.g., JWT verification).
-- `crons/`: Cron jobs for automated tasks (e.g., finding matches and sending emails)
+- `crons/`: Cron jobs for automated tasks (e.g., finding matches and sending emails).
