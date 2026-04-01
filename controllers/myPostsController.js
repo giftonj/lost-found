@@ -63,7 +63,8 @@ exports.updatePost = async (req, res) => {
         category: req.body.category
     }
 
-    const edited = await Post.findByIdAndUpdate(postId, ...body, { new: true })
+    // CORRECT - pass body directly as the update object
+const edited = await Post.findByIdAndUpdate(postId, body, { new: true })
 
     console.log("Edited: ", edited)
 
